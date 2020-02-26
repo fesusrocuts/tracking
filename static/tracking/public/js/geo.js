@@ -67,10 +67,9 @@
 // Token that will be used for auth
 // For more info about how to generate token check
 // http://sdk.wialon.com/playground/demo/app_auth_token
-var TOKEN = '31d0d698e1e38ef47a38330ffd1e1bd375E4A25E4DD7CC3F67262EC0076A05B8FF3D1DDF'
-//FYR67E //831b679564aea5b3d58f27e6b7940a524DE95DD640A54AE4735964142471ECD5AD7225D9
-//TFR862 //a28718f3f40b945186003ec6624726b3337B58CD122DD662B2624808FE11E99A4D536B50
-//USE051 //78a3abe9edae8b21ccbb42fdccf31165F1ED29E68D53633D3B72022A099AC1E7A5ADDF91
+//http://sdk.wialon.com/playground/demo/app_auth_token
+//https://hosting.wialon.com/login.html?client_id=App&access_type=256&activation_time=0&duration=604800&flags=1&redirect_uri=https://hosting.wialon.com/post_token.html
+var TOKEN = '31d0d698e1e38ef47a38330ffd1e1bd3264D226C57E1C56BBD1F626517B54D321F85CAC6'
 
 // global variables
 var map, marker, markerByUnit = {},
@@ -566,6 +565,27 @@ $(document).ready(function () {
       //defaultCheck('13077364', 'USE051');
       $('body').css('width',$(window).width());
       $('body').css('height',$(window).height());
+
+      /*machine = [
+        {
+          key: 13077207,
+          value: 'FYR67E',
+          show: 1
+        },
+        {
+          key: 13077320,
+          value: 'TFR862',
+          show: 1
+        },
+        {
+          key: 13077364,
+          value: 'USE051',
+          show: 1
+        }
+      ]
+      13077207|13077320|13077364
+      "[{"key":13077207,"value":"FYR67E","show":1},{"key":13077320,"value":"TFR862","show":0},{"key":13077364,"value":"USE051TFR862","show":0}]"
+      */
     }
   );
 });

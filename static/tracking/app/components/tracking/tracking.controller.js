@@ -124,7 +124,155 @@ angular.module('controller',['angularMoment','ngMaterial', 'ngMessages', 'ngRout
 .controller('GridTrackingCtrl', function($scope) {
 
     console.log("GridTrackingCtrl");
+    $scope.orders = [
+      {
+        id: 1,
+        created: "fechaxxx",
+        email: "alguien@dfa.co",
+        invoice: "2323",
+        location: "bogota",
+        nit: "2322",
+        status: 1,
+        uid: 12122,
+        units: "13077207",
+        updated: "fechaxxx"
+      },
+      {
+        id: 2,
+        created: "fechaxxx2",
+        email: "alguien2@dfa.co",
+        invoice: "2323",
+        location: "bogota",
+        nit: "2323",
+        status: 1,
+        uid: 12122,
+        units: "13077207",
+        updated: "fechaxxx2"
+      },
+      {
+        id: 3,
+        created: "fechaxxx3",
+        email: "alguien2@dfa.co",
+        invoice: "2323",
+        location: "bogota",
+        nit: "2324",
+        status: 1,
+        uid: 12122,
+        units: "13077320",
+        updated: "fechaxxx2"
+      },
+      {
+        id: 4,
+        created: "fechaxxx4",
+        email: "alguien4@dfa.co",
+        invoice: "2325",
+        location: "bogota",
+        nit: "2325",
+        status: 1,
+        uid: 12122,
+        units: "13077364",
+        updated: "fechaxxx4"
+      },
+      {
+        id: 5,
+        created: "fechaxxx",
+        email: "alguien@dfa.co",
+        invoice: "2353",
+        location: "bogota",
+        nit: "2322",
+        status: 1,
+        uid: 12122,
+        units: "13077207",
+        updated: "fechaxxx"
+      },
+      {
+        id: 6,
+        created: "fechaxxx6",
+        email: "alguien6@dfa.co",
+        invoice: "2363",
+        location: "bogota",
+        nit: "2323",
+        status: 1,
+        uid: 12122,
+        units: "13077207",
+        updated: "fechaxxx6"
+      },
+      {
+        id: 7,
+        created: "fechaxxx7",
+        email: "alguien7@dfa.co",
+        invoice: "2323",
+        location: "bogota",
+        nit: "2324",
+        status: 1,
+        uid: 12122,
+        units: "13077320",
+        updated: "fechaxxx7"
+      },
+      {
+        id: 8,
+        created: "fechaxxx8",
+        email: "alguien8@dfa.co",
+        invoice: "2325",
+        location: "bogota",
+        nit: "2325",
+        status: 1,
+        uid: 12122,
+        units: "13077364",
+        updated: "fechaxxx8"
+      }
+    ];
+    console.log("$scope.orders")
+    console.log($scope.orders)
 
+    $scope.units = [
+      {
+        key: "",
+        value: 'Choose Vehicle',
+        show: 1
+      },
+      {
+        key: 13077207,
+        value: 'FYR67E',
+        show: 1
+      },
+      {
+        key: 13077320,
+        value: 'TFR862',
+        show: 1
+      },
+      {
+        key: 13077364,
+        value: 'USE051',
+        show: 1
+      }
+    ];
+
+    $scope.fromLoc = [
+      {
+        key: "",
+        value: 'Choose Location',
+        show: 1
+      },
+      {
+        key: "bogota",
+        value: "bogota",
+        show: 1
+      },
+      {
+        key: "medellin",
+        value: "medellín",
+        show: 1
+      }
+    ];
+
+    $scope.selectunit = $scope.units[0];
+    $scope.selectFromLoc = $scope.fromLoc[0];
+
+    $scope.changestatus = function(id){
+      console.log("changestatus >> id >>")
+      console.log(id)
+    }
 })
 
 .controller('MyControllerCtrl', function($scope, $mdSidenav) {

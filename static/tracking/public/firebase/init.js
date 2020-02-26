@@ -30,7 +30,9 @@ let listOrders = function(){
       });
   });
 }
-//addOrder({nit:123,invoice:321,vehicle:"car1",location:"bogota",email:"frocuts1982@gmail.com",status:1})
+//addOrder({nit:123,invoice:321,units:13077207,location:"bogota",email:"frocuts1982@gmail.com",status:1})
+//addOrder({nit:123,invoice:321,units:13077320,location:"bogota",email:"frocuts1982@gmail.com",status:1})
+//addOrder({nit:123,invoice:321,units:13077364,location:"bogota",email:"frocuts1982@gmail.com",status:1})
 let addOrder = function(newDocument, uid = ""){
   console.log("addOrder >> ");
   console.log(newDocument);

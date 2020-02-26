@@ -1,0 +1,72 @@
+<div class="table-responsive" ng-controller="GridTrackingCtrl">
+  <div class="row">
+    <div class="col-md-12  col-sm-12 justify-content-center">
+      <h4 class="text-center">New track</h4>
+    </div>
+  </div>
+  <div class="row col-md-12">
+    <div class="col-md-6 col-sm-6">
+      <div class="input-group mb-4">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <i class="glyphicon glyphicon-pencil"></i>
+          </span>
+        </div>
+        <input class="form-control" type="text" placeholder="NIT" ng-model="nit" name="nit" required>
+      </div>
+    </div>
+    <div class="col-md-6 col-sm-6">
+      <div class="input-group mb-4">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <i class="glyphicon glyphicon-pencil"></i>
+          </span>
+        </div>
+        <input class="form-control" type="text" placeholder="Invoice ID" ng-model="invoiceid" name="invoiceid" required>
+      </div>
+    </div>
+  </div>
+
+  <div class="row col-md-12">
+    <div class="col-md-6 col-sm-6">
+      <div class="input-group mb-4">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <i class="glyphicon glyphicon-pencil"></i>
+          </span>
+        </div>
+        <input class="form-control" type="text" placeholder="Email" ng-model="email" name="email" required>
+      </div>
+    </div>
+    <div class="col-md-6 col-sm-6">
+      <div class="input-group mb-4">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <i class="glyphicon glyphicon-pencil"></i>
+          </span>
+        </div>
+        <select class="form-control" ng-model="selectunit" name="selectunit" ng-options="unit as unit.value for unit in units track by unit.key" required>
+        </select>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row col-md-12">
+    <div class="col-md-6 col-sm-6">
+      <div class="input-group mb-4">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <i class="glyphicon glyphicon-pencil"></i>
+          </span>
+        </div>
+        <select class="form-control" ng-model="selectFromLoc" name="selectFromLoc" ng-options="loc as loc.value for loc in fromLoc track by loc.key" required>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-6 col-sm-6">
+      <button ng-click="saveSearchForm(TrackingSearch)" class="btn btn-primary px-4" type="button">Save and notify</button>
+    </div>
+  </div>
+  <p></p>
+</div>
