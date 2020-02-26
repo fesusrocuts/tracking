@@ -67,12 +67,8 @@ header {
   }
 }
 
-.ng-view-default-width{
-  width:100%;
-}
-
 .imgintro {
-  max-width: 300px;
-  width: 25%;
-  min-width: 200px;
+  max-width: 150px;
+  width: 15%;
+  min-width: 100px;
 }

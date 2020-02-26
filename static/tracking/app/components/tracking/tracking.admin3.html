@@ -1,0 +1,59 @@
+<style>
+  .tabsdemoCenterTabs {
+  /*
+ * Style tab width to align with the MD spec:
+ * https://material.io/archive/guidelines/components/tabs.html#tabs-specs
+ */ }
+  .tabsdemoCenterTabs md-tab-item {
+    min-width: 72px; }
+  @media (min-width: 960px) {
+    .tabsdemoCenterTabs md-tab-item {
+      min-width: 160px; } }
+</style>
+<div class="tracking-ctr-admin-top  col-md-12">
+  <form name="{{configuration.catalog.form.trackingadmin.name}}" class="form-vertical center-block text-center" novalidate>
+    <fieldset>
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-12">
+            Hi {{user.username}} <{{user.email}}> ({{user.rol}})
+          </div>
+        </div>
+      </div>
+
+      <div ng-cloak>
+
+      </div>
+
+
+
+    </fieldset>
+  </form>
+</div>
+
+<md-tabs md-dynamic-width md-dynamic-height md-border-bottom>
+  <md-tab>
+    <md-tab-label>
+      <i class="fa fa-globe" aria-hidden="true"></i> <span>All</span>
+    </md-tab-label>
+    <md-tab-body>test all</md-tab-body>
+  </md-tab>
+  <md-tab>
+    <md-tab-label>
+      <i class="fa fa-play" aria-hidden="true"></i> <span>Active</span>
+    </md-tab-label>
+    <md-tab-body>Active</md-tab-body>
+  </md-tab>
+  <md-tab>
+    <md-tab-label>
+      <i class="fa fa-stop" aria-hidden="true"></i> <span>Closed</span>
+    </md-tab-label>
+    <md-tab-body>Closed</md-tab-body>
+  </md-tab>
+  <md-tab>
+    <md-tab-label>
+      <i class="fa fa-forward" aria-hidden="true"></i> <span>New</span>
+    </md-tab-label>
+    <md-tab-body>New</md-tab-body>
+  </md-tab>
+</md-tabs>

@@ -126,7 +126,7 @@ let loadTrackWithEmail = function (email, data, selectorClassAlert, fn){
             console.error(msgAlert1, error);
             setError(selectorClassAlert, msgAlert1);
           });
-
+          /*
           firebase.firestore().collection("logger")
             .where("uid", "==", user.uid)
             .get().then(function(snapshots) {
@@ -135,6 +135,7 @@ let loadTrackWithEmail = function (email, data, selectorClassAlert, fn){
                 console.log(doc.id, " => ", doc.data());
               });
           });
+          */
           fn(data); //callback
         }else{
           msgAlert1 = "Error internal 0x01";

@@ -24,3 +24,13 @@ body{
   top: 0;
   z-index:100;
  }
+
+ .ng-view-default-width{
+   width:calc(100% - 40px);
+   min-width:240px;
+   max-width:100%;
+   background: white;
+ }
+ .brandtext{
+   font-size: 0.6em;
+ }

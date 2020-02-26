@@ -10,14 +10,19 @@
     .tabsdemoCenterTabs md-tab-item {
       min-width: 160px; } }
   .taborders > ._md {
-    /*height: 50px;*/
+    min-height: 275px;
     width: 100% !important;
     position: fixed;
     line-height: 30px;
-    padding: 10px;
+    padding: 0px;
+    top: 56px;
+  }
+  md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
+    min-height: 450px;
   }
 </style>
-<div class="tracking-ctr-admin-top  col-md-12" ng-controller="AdminTrackingCtrl">
-  <div ng-include = "'app/components/tracking/tracking.header.html'"></div>
-  <div ng-include = "'app/components/tracking/tracking.taborders.html'"></div>
+<!-- ng-controller="AdminTrackingCtrl" -->
+<div class="tracking-ctr-admin-top  col-md-12">
+  <div ng-include = "'app/components/tracking/tracking.header2.html'" ng-controller="AdminTrackingCtrl"></div>
+  <div ng-include = "'app/components/tracking/tracking.taborders.html'" ng-controller="CheckLoginCtrl"></div>
 </div>

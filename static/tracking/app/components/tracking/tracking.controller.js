@@ -13,6 +13,23 @@ angular.module('controller',['angularMoment','ngMaterial', 'ngMessages', 'ngRout
   $scope.goSearchHuman = 0;
   $scope.userAuth={}
 
+  try{
+    $scope.user = firebase.auth().currentUser;
+
+    if ($scope.user == undefined)
+      throw new ExcepcionGeneric(1003,"set default header config")
+
+    $scope.headerDefault = {
+      "div1Class":"d-none",
+      "div2Class":"",
+    }
+  }catch(e){
+    $scope.headerDefault = {
+      "div1Class":"",
+      "div2Class":"d-none",
+    }
+  }
+
   $scope.iamhuman = function(idform){
     if(idform === "login"){
       $scope.goLoginHuman = $scope.goLoginHuman == 0 ? 1 : 0;
@@ -119,6 +136,28 @@ angular.module('controller',['angularMoment','ngMaterial', 'ngMessages', 'ngRout
 
 })
 
+.controller('CheckLoginCtrl', function($scope, $location) {
+
+    console.log("CheckLoginCtrl");
+
+    try{
+      $scope.user = firebase.auth().currentUser;
+
+      if ($scope.user == undefined)
+        throw new ExcepcionGeneric(1001,"user not found")
+
+      $scope.user.rol = firebase.$$t._request.rol
+      $scope.user.username = firebase.$$t._request.user
+
+    }catch(e){
+      //console.log(e);
+      console.log("unauthorized")
+      console.log($location)
+      $scope.goHome({},$location);
+      delete firebase.$$t
+      $scope.user = {}
+    }
+})
 
 .controller('AdminTrackingCtrl', function($scope, $location) {
 
@@ -133,18 +172,12 @@ angular.module('controller',['angularMoment','ngMaterial', 'ngMessages', 'ngRout
 
       $scope.user.rol = firebase.$$t._request.rol
       $scope.user.username = firebase.$$t._request.user
-      delete firebase.$$t
+      //delete firebase.$$t
 
-      addOrder({nit:12345,invoice:321,vehicle:"car1",location:"bogota",email:$scope.user.email,status:1},$scope.user.uid)
-      //console.log("add order..........");
-      //console.log($scope.user);
-      //listOrders()
     }catch(e){
-      console.log(e);
-      $scope.goHome({},$location);
+      $scope.user = {}
     }
 })
-
 
 
 .controller('LoginTrackingCtrl', function($scope, $location) {
@@ -154,8 +187,8 @@ angular.module('controller',['angularMoment','ngMaterial', 'ngMessages', 'ngRout
     console.log($scope.goLoginHuman);
 
     try{
-      delete firebase.auth().currentUser;
-      delete firebase.$$t
+      //delete firebase.auth().currentUser;
+      //delete firebase.$$t
     }catch(e){
       console.log("user not exists");
     }

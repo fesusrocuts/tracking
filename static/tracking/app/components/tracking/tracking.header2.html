@@ -2,7 +2,7 @@
 .maintrackmenu{
   line-height: 20px;
   background: red;
-  margin: 0 0 90px 0;
+  margin: 0 0 46px 0;
   padding: 0;
 }
 .example-icon {
@@ -39,7 +39,23 @@
        <span class="navbar-toggler-icon"></span>
      </button>
      <md-menu-content>
-       <md-menu-item><a href="#!">Locate your order</a></md-menu-item>
+       <md-menu-item>
+        <div class="container">
+           <div class="row justify-content-center">
+             <div class="col-md-12">
+               Hi {{user.username}} ({{user.rol}})
+             </div>
+           </div>
+        </div>
+       </md-menu-item>
+       <!--<md-menu-item type="checkbox" ng-model="settings.allowChanges" md-prevent-menu-close>
+         Allow changes
+       </md-menu-item>
+       <md-menu-divider></md-menu-divider>
+       <md-menu-item type="radio" ng-model="settings.mode" ng-value="1">Tracking order</md-menu-item>
+       <md-menu-item type="radio" ng-model="settings.mode" ng-value="2">Admin</md-menu-item>-->
+       <md-menu-item><a href="#!/tracking/admin">Dashboard</a></md-menu-item>
+       <md-menu-item><a href="/">Logout</a></md-menu-item>
        <md-menu-item>
          <button ng-click="$mdMenu.close()" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
            <span class="my-1 mx-2 close">X</span>

@@ -22,7 +22,7 @@ var app = angular.module('app',['ngMaterial', 'ngMessages', 'ngRoute','controlle
   )
   .when('/tracking/admin',
     {
-      templateUrl:'app/components/tracking/tracking.admin2.html',
+      templateUrl:'app/components/tracking/tracking.admin.html',
       controller: 'TrackingCtrl'
     }
   )
