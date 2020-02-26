@@ -1,0 +1,37 @@
+<style>
+.tracking-ctr-qualify-top{
+  position:absolute;
+  z-index: 101;
+  top:400px;
+  left:0;
+  height:216px;
+  overflow:hidden;
+}
+</style>
+<div class="tracking-ctr-qualify-top  col-md-12">
+  <form name="{{configuration.catalog.form.trackingsearch.name}}" class="form-vertical center-block text-center" ng-controller="SearchDateTrackingCtrl" novalidate>
+    <fieldset>
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-12">
+            <div class="card-group">
+              <div class="card p-1">
+                <div class="card-body">
+                  <h4>Rate the service</h4>
+                  <div class="form-group">
+                    <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3" placeholder="Comment"></textarea>
+                  </div>
+                  <div class="p-1 mb-1 row">
+                    <div class="col-12">
+                      <button ng-click="saveSearchForm(TrackingSearch)" class="btn btn-primary px-4" type="button">Send</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</div>

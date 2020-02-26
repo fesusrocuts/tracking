@@ -1,0 +1,102 @@
+<style>
+.tracking-ctr-qualify-top{
+  position:absolute;
+  z-index: 101;
+  top:300px;
+  left:0;
+  /*height:216px;*/
+  overflow:hidden;
+  max-width:600px;
+}
+.margtop100 {
+  margin: auto;
+  bottom: 5%;
+  left: 5%;
+  border: none;
+  padding: 10px;
+  position: fixed;
+  max-width: 330px;
+}
+
+.comment{
+  max-width:600px;
+}
+.center {
+  margin: auto;
+  bottom: 5%;
+  left: 5%;
+  border: none;
+  padding: 10px;
+  position: fixed;
+  max-width: 330px;
+}
+.stars span{
+  cursor: pointer;
+  color: gray;
+}
+.stars span.checked{
+  color: yellow;
+  background:orange;
+}
+.border-1 {
+    border-width:1px !important;
+}
+</style>
+<div class="tracking-ctr-qualify-top  justify-content-center">
+  <form name="{{configuration.catalog.form.trackingsearch.name}}" class="form-vertical center-block text-center" ng-controller="SearchDateTrackingCtrl" novalidate>
+    <fieldset>
+      <div class="container">
+        <div class="row justify-content-center d-none rate center">
+          <div class="col-md-12">
+            <div class="card-group">
+              <div class="card">
+                <div class="card-body">
+                  <h4>Rate the service</h4>
+                  <div class="input-group mb-3 stars justify-content-center" ng-controller="DrawStarsCtrl">
+                    <span class="fa fa-star p-1" ng-click="onGetStars(0)"></span>
+                    <span class="fa fa-star p-1" ng-click="onGetStars(1)"></span>
+                    <span class="fa fa-star p-1" ng-click="onGetStars(2)"></span>
+                    <span class="fa fa-star p-1" ng-click="onGetStars(3)"></span>
+                    <span class="fa fa-star p-1" ng-click="onGetStars(4)"></span>
+                    <span class="row col-12 justify-content-center p-1">{{starsGrade[stars]}}</span>
+
+                    <input class="form-control" type="hidden" placeholder="stars" ng-model="stars" name="stars" required>
+                  </div>
+                  <div class="input-group mb-3">
+                    <textarea class="{{__trackmsg2.length == 0 ? '' : 'border border-danger border-1'}} form-control rounded-0 comment" rows="5" placeholder="{{__trackmsg2.length == 0 ? 'comment required' : __trackmsg2}}" ng-model="comment" name="comment"></textarea>
+                  </div>
+                  <!--<div class="bg-danger text-white p-{{__trackmsg2.length==0 ? 0 : 3}}">
+                      {{__trackmsg2}}
+                  </div>-->
+                  <div class="p-1 mb-1 row"></div>
+                  <div class="p-1 mb-1 row">
+                    <div class="col-12">
+                      <button ng-click="saveSearchForm2(TrackingSearch)" class="btn btn-primary px-4" type="button">Send</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--<div class="card text-white bg-primary py-5 d-md-down-none" >
+                <div class="card-body text-center">
+                  <div>
+                    <h2>How do I comment</h2>
+                    <p>{{__trackmsg2}}</p>
+                  </div>
+                </div>
+              </div>-->
+            </div>
+          </div>
+        </div>
+
+        <div class="row justify-content-center margtop100">
+          <div class="p-1 mb-1 row">
+            <div class="col-12">
+              <button ng-click="showRate(TrackingSearch)" class="btn btn-primary px-4" type="button">Rate the service</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </fieldset>
+  </form>
+</div>

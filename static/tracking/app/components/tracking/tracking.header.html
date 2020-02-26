@@ -1,0 +1,83 @@
+<style>
+.maintrackmenu{
+  line-height: 20px;
+  background: red;
+  margin: 0 0 90px 0;
+  padding: 0;
+}
+.example-icon {
+  padding: 0 14px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.zonetextuser {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+}
+</style>
+<div class="container maintrackmenu" ng-controller="LoginTrackingCtrl">
+
+<div class="bg-primary">
+
+<nav class="navbar fixed-top navbar-dark bg-primary" style="z-index:100;">
+  <a class="navbar-brand" href="#">
+    <img src="https://comercializadoragyl.com/wp-content/uploads/2019/03/logogoyeneche_web.png" width="30" height="30" class="d-inline-block align-top" alt="">
+    <span class="h6">Comercializadora GyL</span>
+  </a>
+
+  <hljs lang="html">
+  <md-menu-bar>
+   <md-menu>
+     <button ng-click="$mdMenu.open()" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+       <span class="navbar-toggler-icon"></span>
+     </button>
+     <md-menu-content>
+       <!--<md-menu-item type="checkbox" ng-model="settings.allowChanges" md-prevent-menu-close>
+         Allow changes
+       </md-menu-item>
+       <md-menu-divider></md-menu-divider>
+       <md-menu-item type="radio" ng-model="settings.mode" ng-value="1">Tracking order</md-menu-item>
+       <md-menu-item type="radio" ng-model="settings.mode" ng-value="2">Admin</md-menu-item>-->
+       <md-menu-item><a href="#!">Locate your order</a></md-menu-item>
+       <md-menu-item><a href="#!/tracking/login">Login</a></md-menu-item>
+       <md-menu-item>
+         <button ng-click="$mdMenu.close()" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+           <span class="my-1 mx-2 close">X</span>
+         </button>
+       </md-menu-item>
+     </md-menu-content>
+   </md-menu>
+  </md-menu-bar>
+  </hljs>
+</nav>
+</div>
+
+<div class="bg-white zonetextuser">
+  <span class="useradmin">{{user.email}}</span>
+</div>
+
+<div class="container maintrackmenu">
+  <nav class="navbar fixed-bottom justify-content-center" style="z-index:100;">
+    <a class="nav-item nav-link" href="#">
+      <i class="fa fa-facebook" aria-hidden="true"></i>
+    </a>
+    <a class="nav-item nav-link" href="#">
+      <i class="fa fa-whatsapp" aria-hidden="true"></i>
+    </a>
+    <a class="nav-item nav-link" href="#">
+      <i class="fa fa-youtube-play" aria-hidden="true"></i>
+    </a>
+    <a class="nav-item nav-link" href="#">
+      <i class="fa fa-instagram" aria-hidden="true"></i>
+    </a>
+  </nav>
+</div>
+
+</div>

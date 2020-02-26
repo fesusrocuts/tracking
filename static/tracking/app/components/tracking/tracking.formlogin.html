@@ -1,0 +1,64 @@
+<div class="tracking-ctr-formlogin-top  col-md-12">
+  <form name="{{configuration.catalog.form.trackinglogin.name}}" class="form-vertical center-block text-center" ng-controller="LoginTrackingCtrl" novalidate>
+    <fieldset>
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-12">
+            <div class="card-group">
+              <div class="card p-1">
+                <div class="card-body">
+                  <h2>Login</h2>
+                  <p class="text-muted">Sign In to your account</p>
+                  <!--
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="glyphicon glyphicon-envelope"></i>
+                      </span>
+                    </div>
+                    <input class="form-control email" type="text" placeholder="Email" ng-model="email" name="email">
+                  </div>
+                  -->
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="glyphicon glyphicon-user"></i>
+                      </span>
+                    </div>
+                    <input class="form-control user" type="text" placeholder="User" ng-model="user" name="user">
+                  </div>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="glyphicon glyphicon-eye-close"></i>
+                      </span>
+                    </div>
+                    <input class="form-control pwd" type="password" placeholder="Password" ng-model="pwd" name="pwd">
+                  </div>
+                  <div class="input-group mb-1 justify-content-center">
+                    <span class="">
+                      <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" ng-click="iamhuman('login')" ng-model="goLoginHuman" id="aimluck">
+                        <label class="custom-control-label" for="aimluck">I'm not a robot</label>
+                      </div>
+                    </span>
+                  </div>
+
+                  <div class="bg-danger text-white msgAlert1">
+                    {{__trackmsg3}}
+                  </div>
+
+                  <div class="row">
+                    <div class="col-12">
+                      <button ng-click="saveSearchForm3(TrackingLogin)" class="btn btn-primary px-4" type="button">I've lucky</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</div>

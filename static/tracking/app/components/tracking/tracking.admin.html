@@ -1,0 +1,23 @@
+<style>
+  .tabsdemoCenterTabs {
+  /*
+ * Style tab width to align with the MD spec:
+ * https://material.io/archive/guidelines/components/tabs.html#tabs-specs
+ */ }
+  .tabsdemoCenterTabs md-tab-item {
+    min-width: 72px; }
+  @media (min-width: 960px) {
+    .tabsdemoCenterTabs md-tab-item {
+      min-width: 160px; } }
+  .taborders > ._md {
+    /*height: 50px;*/
+    width: 100% !important;
+    position: fixed;
+    line-height: 30px;
+    padding: 10px;
+  }
+</style>
+<div class="tracking-ctr-admin-top  col-md-12" ng-controller="AdminTrackingCtrl">
+  <div ng-include = "'app/components/tracking/tracking.header.html'"></div>
+  <div ng-include = "'app/components/tracking/tracking.taborders.html'"></div>
+</div>

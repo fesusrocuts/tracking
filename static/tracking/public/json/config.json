@@ -1,0 +1,63 @@
+{
+	"catalog":{
+		"msg":{
+			"label":{
+				"L001":"Tracking by order",
+				"L002":"Nit",
+				"L003":"Invoice number",
+				"L004":"Email",
+				"L005":"Vehicle",
+				"L006":"Dispatch office",
+				"L007":"available label",
+				"L008":"available label",
+				"L009":"Start tracking"
+			},
+			"alert":{
+				"MS01":"El campo es obligatorio",
+				"MS02":"La Fecha Final no puede ser inferior a la Fecha Inicial",
+				"MS03":"El rango para la fecha inicial y fecha final no puede superar un a�o",
+				"MS04":"No se encontraron datos de acuerdo a los filtros ingresados para la consulta",
+				"MS05":"Reservado",
+				"MS06":"La fecha no es v�lida",
+				"MS07":"La fecha inicial y final  no pueden ser mayores a la fecha actual"
+			},
+			"other":{
+				"F001":"dd-mm-yyyy",
+				"LA01":"Buscar",
+				"L101":"Resultados",
+				"L102":"Acciones",
+				"L103":"Editar",
+				"L104":"Borrar"
+			}
+		},
+		"form":{
+			"trackingadmin":{
+				"name":"TrackingAdmin",
+				"id":"tracking-admin",
+				"class":"tracking-admin",
+				"btn":{
+					"A001":"send",
+					"A002":"cancel"
+				}
+			},
+			"trackinglogin":{
+				"name":"TrackingLogin",
+				"id":"tracking-login",
+				"class":"tracking-login",
+				"btn":{
+					"A001":"send",
+					"A002":"cancel"
+				}
+			},
+			"trackingsearch":{
+				"name":"TrackingSearch",
+				"id":"tracking-search",
+				"class":"tracking-search",
+				"btn":{
+					"A001":"send",
+					"A002":"cancel"
+				}
+			}
+		}
+	}
+}

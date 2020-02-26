@@ -1,0 +1,83 @@
+<style>
+.tracking-ctr-search-top{
+  width: 95%;
+}
+</style>
+<div class="tracking-ctr-search-top">
+  <form name="{{form.name}}" class="form-vertical" ng-controller="SearchDateTrackingCtrl" novalidate>
+    <fieldset>
+
+      <div class="form-group form-group-md">
+          <h1 class="L001">{{msg.label.L001}}</h1>
+      </div>
+
+      <div class="form-group col-sm-12">
+
+          <div class="form-group col-xs-6 col-sm-6">
+            <label class="col-sm-4 control-label" for="L002">{{msg.label.L002}}</label>
+            <div class="col-sm-8">
+              <input class="form-control" type="text" name="L002" ng-model="L002" id="L002" placeholder="{{msg.label.L002}}">
+            </div>
+          </div>
+
+          <div class="form-group col-xs-6 col-sm-6">
+            <label class="col-sm-4 control-label" for="L003">{{msg.label.L003}}</label>
+            <div class="col-sm-8">
+              <input class="form-control" type="text" value="{{L002}}" name="L003" ng-model="L003" id="L003" placeholder="{{msg.label.L003}}">
+            </div>
+          </div>
+
+      </div>
+      <div class="form-group col-sm-12">
+
+        <div class="form-group col-xs-6 col-sm-6">
+          <label class="col-sm-4 control-label" for="L004">{{msg.label.L004}}</label>
+          <div class="col-sm-8">
+            <input class="form-control" type="date" name="L004" ng-model="L004" id="L004" placeholder="{{msg.other.F001}}" min="{{L004LL}}" max="{{L004UL}}"  required validate-search-directive>
+            <span class="text-warning" ng-show="{{form.name}}.L004.$error.required">{{msg.alert.MS01}}</span>
+          </div>
+        </div>
+
+        <div class="form-group col-xs-6 col-sm-6">
+          <label class="col-sm-4 control-label" for="L005">{{msg.label.L005}}</label>
+          <div class="col-sm-8">
+            <input class="form-control" type="date" name="L005" ng-model="L005" id="L005" placeholder="{{msg.other.F001}}" min="{{L005LL}}" max="{{L005UL}}" required validate-search-directive>
+            <span class="text-warning" ng-show="{{form.name}}.L005.$error.required">{{msg.alert.MS01}}</span>
+          </div>
+        </div>
+
+        <div class="form-group col-xs-6 col-sm-6">
+          <label class="col-sm-4 control-label" for="L006">{{msg.label.L006}}</label>
+          <div class="col-sm-8">
+            <select matNativeControl ng-model="selectedDispatch" name="L006">
+              <option value="" selected></option>
+              <option ng-repeat="dispatch in selectDispatch" [value]="dispatch.value">
+                {{dispatch.viewValue}}
+              </option>
+            </select>
+            <p> Selected dispatch: {{selectedDispatch}} </p>
+            <span class="text-warning" ng-show="{{form.name}}.L006.$error.required">{{msg.alert.MS01}}</span>
+          </div>
+        </div>
+
+      </div>
+
+      <input class="form-control" type="checkbox" ng-model="__checked_ms02" ng-hide="true" >
+
+      <div class="form-group col-sm-12 text-warning report-save" name="xL001" ng-show="__checked_ms02">
+        {{ msg.alert.MS02 }}
+      </div>
+      <div class="form-group col-sm-12 text-warning report-save" ng-show="__checked_ms03">
+        {{ msg.alert.MS03 }}
+      </div>
+      <div class="form-group col-sm-12">
+        <div class="actions center-block text-center">
+            <input class="btn btn-primary" type="button" name="{{form.btn.A001}}" value="{{msg.other.LA01}}" disabled=""
+            ng-disabled="{{form.name}}.L004.$invalid || {{form.name}}.L005.$invalid"
+            ng-click="saveSearchForm(TrackingSearch)"
+            >
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</div>

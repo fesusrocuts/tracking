@@ -1,0 +1,59 @@
+<style>
+.tracking-ctr-search-top{
+}
+</style>
+<div class="tracking-ctr-search-top  col-md-12">
+  <form name="{{configuration.catalog.form.trackingsearch.name}}" class="form-vertical center-block text-center" ng-controller="SearchDateTrackingCtrl" novalidate>
+    <fieldset>
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-12">
+            <div class="card-group">
+              <div class="card p-1">
+                <div class="card-body">
+                  <h2>Locate your order</h2>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="glyphicon glyphicon-user"></i>
+                      </span>
+                    </div>
+                    <input class="form-control" type="text" placeholder="NIT" ng-model="nit" name="nit" required>
+                  </div>
+                  <div class="input-group mb-4">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="glyphicon glyphicon-pencil"></i>
+                      </span>
+                    </div>
+                    <input class="form-control" type="text" placeholder="Invoice ID" ng-model="invoiceid" name="invoiceid" required>
+                  </div>
+
+                  <div class="input-group mb-1 justify-content-center">
+                    <span class="">
+                      <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" ng-click="iamhuman('search')" ng-model="goLoginHuman" id="aimluck">
+                        <label class="custom-control-label" for="aimluck">I'm not a robot</label>
+                      </div>
+                    </span>
+                  </div>
+
+                  <div class="bg-danger text-white">
+                    <span>
+                      {{__trackmsg}}
+                    </span>
+                  </div>
+                  <div class="p-3 mb-2 row">
+                    <div class="col-12">
+                      <button ng-click="saveSearchForm(TrackingSearch)" class="btn btn-primary px-4" type="button">Get track</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</div>

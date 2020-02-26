@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Tracking of Orders</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-functions.js"></script> -->
+
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-functions.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-database.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-analytics.js"></script>
+
+
+    <link rel="stylesheet" href="/static/tracking/public/lib/bootstrap-4.3.1-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/tracking/public/lib/bootstrap-4.3.1-dist/fonts/icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- AngularJS Material CSS now available via Google CDN; version 1.1.9 used here -->
+    <link rel="stylesheet" href="/static/tracking/public/lib/angular-material/angular-material.min.css">
+    <link rel="stylesheet" href="/static/tracking/public/lib/angular-material/modules/js/button/button.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+    <link rel="stylesheet" href="/static/tracking/public/css/roboto.css">
+
+
+    <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .checked {
+      color: orange;
+    }
+    /*.drag-drop-item
+    {
+      touch-action: none;
+    }
+    * {
+      touch-action: none;
+    }*/
+    </style>
+
+    <script src="/static/tracking/public/lib/angular-1.7.9/angular.js"></script>
+    <script src="/static/tracking/public/lib/angular-1.7.9/angular-route.js"></script>
+    <script src="/static/tracking/public/lib/angular-1.7.9/angular-aria.js"></script>
+    <script src="/static/tracking/public/lib/angular-1.7.9/angular-animate.js"></script>
+    <script src="/static/tracking/public/lib/angular-1.7.9/angular-messages.js"></script>
+    <script src="/static/tracking/public/lib/moment/moment.js"></script>
+    <script src="/static/tracking/public/lib/moment/moment-with-locales.js"></script>
+    <script src="/static/tracking/public/lib/angular-moment-master/angular-moment.js"></script>
+    <script src="/static/tracking/public/lib/custom/generic.tools.js"></script>
+    <script src="/static/tracking/public/lib/jquery/jquery-3.4.1.min.js"></script>
+    <script src="/static/tracking/public/lib/angular-material/angular-material.min.js"></script>
+    <script src="/static/tracking/public/lib/angular-material/modules/js/button/button.min.js"></script>
+
+
+    <script src="/static/tracking/app/app.js"></script>
+    <script src="/static/tracking/app/components/tracking/tracking.controller.js"></script>
+    <script src="/static/tracking/app/components/tracking/tracking.directive.js"></script>
+    <script src="/static/tracking/public/js/default.js"></script>
+  </head>
+
+  <body class="app flex-row align-items-center" ng-app='app'>
+    <div class="container">
+      <div class="row justify-content-center">
+        <ng-view class="ng-view-default-width"></ng-view>
+      </div>
+    </div>
+
+
+
+<!--
+    //si quiero en esta misma instancia algun template
+    <div class="slide-animate-container">
+      <div class="slide-animate" ng-include="template.url"></div>
+    </div>
+-->
+
+  </body>
+</html>

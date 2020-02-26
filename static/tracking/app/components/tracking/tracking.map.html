@@ -1,0 +1,42 @@
+<div style="top:50px;" class="d-flex flex-row justify-content-center" ng-controller="DrawTrackingCtrl">
+  <iframe allow="*" class="iframe" name="iframe" id="iframe" width="100%" height="240" src="{{trustSrc('route/' + order + '/index.html')}}" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" allowfullscreen></iframe>
+</div>
+<script type="text/javascript">
+//{{trustSrc(route)}}
+//frameDocument.location.ancestorOrigins[0]="https://www.google.com"
+//frameDocument.location.href="https://www.google.com"
+/*
+var hostIframe = "www.google.com"
+var protocolIframe = "https:"
+var iframe1 = document.getElementById('iframe');
+var frameDocument = iframe1.contentDocument ? iframe1.contentDocument : iframe1.contentWindow.document;
+//document.referrer or ancestorOrigins
+frameDocument.location.ancestorOrigins[0]=protocolIframe + "//" + hostIframe
+//frameDocument.location.host = hostIframe
+//frameDocument.location.hostname = hostIframe
+frameDocument.location.origin = protocolIframe + "//" + hostIframe
+//frameDocument.location.pathname = "/"
+//frameDocument.location.port = ""
+//frameDocument.location.protocol = protocolIframe //***
+frameDocument.location.href = protocolIframe + "//" + hostIframe + "/"
+
+iframe_policy = frameDocument.featurePolicy;
+iframe_policy.allowsFeature('geolocation');
+iframe_policy.allowsFeature('fullscreen');
+iframe_policy.allowsFeature('vr');
+iframe_policy.allowsFeature('document-domain');
+//featurePolicy.allowsFeature('syncxhr') //sync-xhr
+//Feature-Policy: document-domain <allowlist>;
+//document-domain
+//window.postMessage.
+iframe_policy.getAllowlistForFeature('geolocation');
+iframe_policy.allowedFeatures();
+iframe_policy.features();
+*/
+//var iframe1 = document.getElementById('iframe');
+//var frameDocument = iframe1.contentDocument ? iframe1.contentDocument : iframe1.contentWindow.document;
+//console.log(frameDocument.location)
+
+//var title = frameDocument.getElementsByTagName("h1")[0];
+//alert(title.textContent);
+</script>
