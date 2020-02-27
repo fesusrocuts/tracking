@@ -3,7 +3,6 @@
     <thead>
       <tr>
         <td class="d-none" scope="row">Id</td>
-        <td>Action</td>
         <td>Invoice</td>
         <td>Nit</td>
         <td>Units</td>
@@ -18,16 +17,6 @@
     <tbody>
       <tr ng-repeat="order in orders">
         <td class="d-none" scope="row">{{order.id}}</td>
-        <td>
-          <div class="input-group mb-1 justify-content-center">
-            <span class="">
-              <div class="custom-control custom-switch">
-                <input type="checkbox" class="custom-control-input" checked="checked" ng-click="changestatus(1)" id="aimluck{{order.id}}">
-                <label class="custom-control-label" for="aimluck{{order.id}}">&nbsp;</label>
-              </div>
-            </span>
-          </div>
-        </td>
         <td>{{order.invoice}}</td>
         <td>{{order.nit}}</td>
         <td>{{order.units}}</td>
