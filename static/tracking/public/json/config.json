@@ -74,13 +74,13 @@
 		"mail":{
 			"addorder":{
 				"header_img":"https://trackingorders.herokuapp.com/static/tracking/public/images/header.png",
-				"footer_img":"https://trackingorders.herokuapp.com/static/tracking/public/images/footer.png",
+				"footer_img":"https://trackingorders.herokuapp.com/static/tracking/public/images/footer2.png",
 				"subject":"Se ha generado una factura y su respectivo seguimiento",
 				"message":"e3toZWFkZXJfaW1nfX0KPGJyPgo8YnI+CkVzdGltYWRvIHt7Y2xpZW50bmFtZX19LCBtdWNoYXMgZ3JhY2lhcyBzdSBjb21wcmEhCjxicj4KPGJyPgpMZSBpbmZvcm1hbW9zIHF1ZSBwdWVkZSBoYWNlciBzZWd1aW1pZW50byBkZSBzdSBlbnbDrW8gZW4gZWwgc2lndWllbnRlIGVubGFjZSA8YSB0aXRsZT0ibGluayIgaHJlZj0ie3tsaW5rfX0iPnt7bGlua319PC9hPiBkaWdpdGFuZG8gc3UgTklUICh7e25pdH19KSAoU2luIGTDrWdpdG8gZGUgdmVyaWZpY2FjacOzbikgeSBlbCBuw7ptZXJvIGRlIHN1IGZhY3R1cmEgKHt7aW52b2ljZWlkfX0pLgo8YnI+CkxlIGFncmFkZWNlbW9zIHF1ZSBsdWVnbyBkZSByZWNpYmlyIHN1IHBlZGlkbyBub3MgZGVqZSBzdXMgY29tZW50YXJpb3MgeSBsYSBjYWxpZmljYWNpw7NuIGRlbCBzZXJ2aWNpbywgZW4gZWwgZXNwYWNpbyBkaXNlw7FhZG8gcGFyYSBlc3RvIGVuIGxhIHdlYiBkZWwgZW5sYWNlLgo8YnI+CkN1YWxxdWllciBpbnF1aWV0dWQgY29uIGd1c3RvIHNlcsOhIGF0ZW5kaWRhLgo8YnI+Cjxicj4KPGJyPgpOT1RBOiBFbCBtYXBhIHNlIG11ZXN0cmEgw7puaWNhbWVudGUgY3VhbmRvIHN1IG9yZGVuIGVzdMOhIGVuIHJ1dGEuIEVuIGNhc28gZGUgcXVlIGxhIG9yZGVuIHNlIGVuY3VlbnRyZSBhw7puIGVuIG51ZXN0cmFzIGJvZGVnYXMgdmlzdWFsaXphcsOhIHVuYSBpbWFnZW4gZXN0w6F0aWNhLgo8YnI+Cnt7Zm9vdGVyX2ltZ319"
 			},
 			"comment":{
 				"header_img":"https://trackingorders.herokuapp.com/static/tracking/public/images/header.png",
-				"footer_img":"https://trackingorders.herokuapp.com/static/tracking/public/images/footer.png",
+				"footer_img":"https://trackingorders.herokuapp.com/static/tracking/public/images/footer2.png",
 				"subject":"Nuevo comentario sistema de seguimiento",
 				"message":"..."
 			}

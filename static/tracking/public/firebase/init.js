@@ -116,7 +116,10 @@ let addOrder = function(newDocument, uid = "", config = ""){
     message = message.replace('{{footer_img}}', footer_img);
     message = message.replace('{{clientname}}', newDocument.clientname);
     message = message.replace('{{link}}', config.catalog.link.clients);
+    message = message.replace('{{link}}', config.catalog.link.clients);
     message = message.replace('{{nit}}', newDocument.nit);
+    message = message.replace('{{nit}}', newDocument.nit);
+    message = message.replace('{{invoiceid}}', newDocument.invoiceid);
     message = message.replace('{{invoiceid}}', newDocument.invoiceid);
     let dp1 = newDocument.forecast_date.toISOString().split("T")[0];
     let dp2 = newDocument.forecast_time.toISOString().split("T")[1];
