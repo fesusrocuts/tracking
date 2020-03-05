@@ -1,7 +1,7 @@
 import email.utils
 from time import mktime, strptime
 from datetime import datetime
-
+"""
 forecast_date = "Tue, 03 Mar 2020 22:04:40 GMT"
 #forecast_date = "Tue, 04 Mar 2020 22:04:40 GMT"
 forecast_time = "Thu, 01 Jan 1970 14:00:00 GMT"
@@ -31,3 +31,17 @@ print(todaydtiso)
 print("diff")
 print(diff_date)
 print(diff_date2)
+"""
+
+forecastdt = datetime.strptime("2020-03-04 09:42:00", '%Y-%m-%d %H:%M:%S')
+#forecastdtiso = datetime.timestamp(forecastdt)
+forecastts = int(mktime(forecastdt.timetuple()))
+forecastdtiso =datetime.fromtimestamp(forecastts)
+
+today = datetime.now()
+todayts = int(mktime(today.timetuple()))
+todaydtiso = datetime.fromtimestamp(todayts)
+
+diff_date = today - forecastdtiso  # timedelta object
+itstime = int(todayts - forecastts)
+print(itstime)

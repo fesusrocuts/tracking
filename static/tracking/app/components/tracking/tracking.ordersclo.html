@@ -15,7 +15,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-if="order.status == 0" ng-repeat="order in orders">
+      <tr ng-if="order.status != 1" ng-repeat="order in orders">
         <td class="d-none" scope="row">{{order.id}}</td>
         <td>{{order.invoiceid}}</td>
         <td>{{order.nit}}</td>

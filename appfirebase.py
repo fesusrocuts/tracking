@@ -354,6 +354,21 @@ def diff_date_sting(forecast):
     itstime = int(todayts - forecastts) > 0
     return itstime
 
+def diff_date_sting2(forecast):
+    print("diff_date_sting")
+    # if forecast_datedt and  forecast_time are String
+    forecastdt = datetime.strptime(forecast, '%Y-%m-%d %H:%M:%S')
+    #forecastdtiso = datetime.timestamp(forecastdt)
+    forecastts = int(mktime(forecastdt.timetuple()))
+    forecastdtiso =datetime.fromtimestamp(forecastts)
+
+    today = datetime.now()
+    todayts = int(mktime(today.timetuple()))
+    todaydtiso = datetime.fromtimestamp(todayts)
+
+    diff_date = today - forecastdtiso  # timedelta object
+    itstime = int(todayts - forecastts) > 86400
+    return itstime
 
 
 @app.route('/checkroute', methods=['GET', 'POST', 'PUT', 'DELETE'])
@@ -444,7 +459,7 @@ def checkroute():
         """
         file = "static/temporarily/{}.json".format(link)
         save_to_json_file(objRoute, file)
-        objRoute.update({"raw":{}})
+        # objRoute.update({"raw":{}})
 
     return objRoute
 
@@ -479,7 +494,7 @@ def addcomment():
     dataMessageQueue = {
       "subject":"Nuevo comentario en sistema de seguimiento",
       "message":messagehtml,
-      "email":"fesusrocuts@gmail.com",
+      "email":"ventas@comercializadoragyl.com",
       "status": 1,
       "created": todaydtiso,
       "updated": todaydtiso,
@@ -535,3 +550,32 @@ def save_to_json_file(my_obj, filename):
     """
     with open(filename, 'w', encoding='utf-8') as f:
         json.dump(my_obj, f)
+
+
+@app.route('/closedoldorders', methods=['GET', 'POST', 'PUT', 'DELETE'])
+def closedoldorders():
+    print("--- default_app firebase closedoldorders ---")
+
+    register2 = {
+    	"status": 200,
+    	"message": "updated status",
+    }
+
+    docs = db.collection(u'orders') \
+    .where(u'status', u'==', 0).stream()
+
+    row = {}
+    for doc in docs:
+        print(u'{} => {}'.format(doc.id, doc.to_dict()))
+        row = doc.to_dict();
+        forecast_date = str(row.get('forecast_date'))
+        forecast_time = str(row.get('forecast_time'))
+        diff = diff_date_sting2(forecast_date[:10] + forecast_time[10:19])
+        if (diff == True):
+            row.update({"status": 2})
+            db.collection(u'orders').document(doc.id).set(row)
+
+    print("--- default_app firebase closedoldorders end ---")
+    # ts = int(mktime(datetime.now().timetuple()))
+
+    return register2
