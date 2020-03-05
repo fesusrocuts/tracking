@@ -1,4 +1,4 @@
-<div class="table-responsive" ng-controller="GridTrackingCtrl">
+<div class="table-responsive" ng-controller="GridTrackingCtrl" data-ng-init="init('active')">
   <table class="table table-striped">
     <thead>
       <tr>
@@ -8,36 +8,31 @@
         <td>Nit</td>
         <td>Units</td>
         <td>Email</td>
-        <td>Created</td>
-        <td>Updated</td>
-        <td>Location</td>
+        <td class="d-none">Created</td>
+        <td class="d-none">Updated</td>
+        <td>Warehouse</td>
         <td class="d-none">Status</td>
         <td class="d-none">Uid</td>
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="order in orders">
+      <tr ng-if="order.status == 1" ng-repeat="order in orders">
         <td class="d-none" scope="row">{{order.id}}</td>
         <td>
-          <div class="input-group mb-1 justify-content-center">
-            <span class="">
-              <div class="custom-control custom-switch">
-                <input type="checkbox" class="custom-control-input" checked="checked" ng-click="changestatus(1)" id="aimluck{{order.id}}">
-                <label class="custom-control-label" for="aimluck{{order.id}}">&nbsp;</label>
-              </div>
-            </span>
-          </div>
+          <i ng-click="changestatus(order)" class="fa fa-toggle-{{order.status === 1 ? 'on' : 'off'}}" style="font-size:48px;color:{{order.status === 1 ? 'blue' : 'gray'}}"></i>
         </td>
-        <td>{{order.invoice}}</td>
+        <td>{{order.invoiceid}}</td>
         <td>{{order.nit}}</td>
-        <td>{{order.units}}</td>
+        <td>{{order.unit}}</td>
         <td>{{order.email}}</td>
-        <td>{{order.created}}</td>
-        <td>{{order.updated}}</td>
-        <td>{{order.location}}</td>
+        <td class="d-none">{{order.created}}</td>
+        <td class="d-none">{{order.updated}}</td>
+        <td>{{order.warehouse}}</td>
         <td class="d-none">{{order.status}}</td>
         <td class="d-none">{{order.uid}}</td>
       </tr>
     </tbody>
   </table>
+  <button class="btn btn-primary px-4" ng-click="init('active')" type="button">Refresh</button>
+  <button class="btn btn-primary px-4" ng-click="getOrders()" type="button">Show latest</button>
 </div>

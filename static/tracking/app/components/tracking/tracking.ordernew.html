@@ -1,9 +1,14 @@
 <div class="table-responsive" ng-controller="GridTrackingCtrl">
-  <div class="row">
-    <div class="col-md-12  col-sm-12 justify-content-center">
-      <h4 class="text-center">New track</h4>
-    </div>
-  </div>
+  <form name="{{configuration.catalog.form.trackingnew.name}}" class="form-vertical center-block text-center" ng-controller="GridTrackingCtrl" novalidate>
+    <fieldset>
+
+  <div class="row col-md-12">
+    <div class='col-sm-12 p-3'>
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title text-primary text-center">Configure new tracking</h5>
+
+
   <div class="row col-md-12">
     <div class="col-md-6 col-sm-6">
       <div class="input-group mb-4">
@@ -45,29 +50,94 @@
             <i class="glyphicon glyphicon-pencil"></i>
           </span>
         </div>
-        <select class="form-control" ng-model="selectunit" name="selectunit" ng-options="unit as unit.value for unit in units track by unit.key" required>
-        </select>
+        <input class="form-control" type="text" placeholder="Client name" ng-model="clientname" name="clientname" required>
+      </div>
+    </div>
+  </div>
+
+  </div>
+  </div>
+  </div>
+  </div>
+
+
+
+  <div class="row col-md-12">
+    <div class='col-sm-6 p-3'>
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title text-primary text-center">Dispatch</h5>
+          <div class="row col-md-12">
+            <div class="col-md-6 col-sm-6">
+              <div class="input-group mb-4">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="glyphicon glyphicon-pencil"></i>
+                  </span>
+                </div>
+                <select class="form-control" ng-model="unit" name="unit" ng-options="unit as unit.value for unit in units track by unit.key" required>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+              <div class="input-group mb-4">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="glyphicon glyphicon-pencil"></i>
+                  </span>
+                </div>
+                <select class="form-control" ng-model="warehouse" name="warehouse" ng-options="loc as loc.value for loc in fromLoc track by loc.key" required>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='col-sm-6 p-3'>
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title text-primary text-center">Schedule the exit</h5>
+          <div class="row col-md-12">
+              <div class='col-sm-6'>
+                <div class="input-group mb-4">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="glyphicon glyphicon-pencil"></i>
+                    </span>
+                  </div>
+                  <input class="form-control" type="date" ng-model="forecast_date" name="forecast_date" value="{{forecast_date}}" required>
+                </div>
+              </div>
+              <div class='col-sm-6'>
+                <div class="input-group mb-4">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="glyphicon glyphicon-pencil"></i>
+                    </span>
+                  </div>
+                  <input class="form-control" type="time" ng-model="forecast_time" name="forecast_time" value="{{forecast_time}}" required>
+                </div>
+              </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
 
   <div class="row col-md-12">
-    <div class="col-md-6 col-sm-6">
-      <div class="input-group mb-4">
-        <div class="input-group-prepend">
-          <span class="input-group-text">
-            <i class="glyphicon glyphicon-pencil"></i>
-          </span>
-        </div>
-        <select class="form-control" ng-model="selectFromLoc" name="selectFromLoc" ng-options="loc as loc.value for loc in fromLoc track by loc.key" required>
-        </select>
+    <div class="col-md-12 col-sm-12">
+      <div class="bg-danger text-white">
+        <span>
+          {{__trackmsg4}}
+        </span>
       </div>
-    </div>
-    <div class="col-md-6 col-sm-6">
-      <button class="btn btn-primary px-4" type="button">Save and notify</button>
-      <!--<button ng-click="saveOrderForm(TrackingSearch)" class="btn btn-primary px-4" type="button">Save and notify</button>-->
+      <button class="btn btn-primary px-4" ng-click="saveTrackForm(TrackingNew)" type="button">Save and notify</button>
     </div>
   </div>
   <p></p>
+
+  </fieldset>
+  </form>
 </div>

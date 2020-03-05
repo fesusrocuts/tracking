@@ -2,8 +2,11 @@ import requests
 import os, sys
 from random import randint
 import uuid
-#import json
 import time
+from time import mktime, strptime
+import email.utils
+from datetime import datetime
+#import json
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
@@ -12,6 +15,8 @@ from firebase_admin import auth
 from appbase import app
 from flask import Flask, request, render_template, \
     json, jsonify, redirect, url_for
+from werkzeug import secure_filename
+from mailhtml import *
 
 ################################################################
 ########################## firebase ############################
@@ -317,3 +322,216 @@ def auth2():
 ################################################################
 ########################## firebase auth user end ##############
 ################################################################
+
+def forecast_diff(forecast_date, forecast_time):
+    forecast = forecast_date[:16] + forecast_time[16:]
+    forecastts = mktime(email.utils.parsedate(forecast))
+    forecastdtiso = datetime.fromtimestamp(forecastts)
+
+    today = datetime.now()
+    todayts = int(mktime(today.timetuple()))
+    todaydtiso = datetime.fromtimestamp(todayts)
+
+
+    diff_date = today - forecastdtiso  # timedelta object
+    diff_date2 = todayts - forecastts  # timedelta object
+    itstime = diff_date2 > 0
+    return itstime
+
+def diff_date_sting(forecast):
+    print("diff_date_sting")
+    # if forecast_datedt and  forecast_time are String
+    forecastdt = datetime.strptime(forecast, '%Y-%m-%d %H:%M:%S')
+    #forecastdtiso = datetime.timestamp(forecastdt)
+    forecastts = int(mktime(forecastdt.timetuple()))
+    forecastdtiso =datetime.fromtimestamp(forecastts)
+
+    today = datetime.now()
+    todayts = int(mktime(today.timetuple()))
+    todaydtiso = datetime.fromtimestamp(todayts)
+
+    diff_date = today - forecastdtiso  # timedelta object
+    itstime = int(todayts - forecastts) > 0
+    return itstime
+
+
+
+@app.route('/checkroute', methods=['GET', 'POST', 'PUT', 'DELETE'])
+def checkroute():
+    print("--- default_app firebase checkroute ---")
+
+    _request = request.get_json(force=True)
+    register2 = {
+    	"status": 200,
+    	"message": "waiting...",
+    	"route":"routeended",
+    	# "route2":"e9d974b520074478b201f8ca33136b7b"
+    }
+    link =  _request.get("link")
+    nit =  _request.get("nit")
+    invoiceid =  _request.get("invoiceid")
+
+    if (link is not None):
+        os.remove("static/temporarily/{}.json".format(link))
+        link = ""
+        print("Link Removed!")
+
+    if (nit is None or invoiceid is None):
+        return {}
+
+    docs = db.collection(u'orders') \
+    .where(u'nit', u'==', nit) \
+    .where(u'invoiceid', u'==', invoiceid).stream()
+
+    row = {}
+    for doc in docs:
+        print(u'{} => {}'.format(doc.id, doc.to_dict()))
+        row = doc.to_dict();
+        break;
+
+    diff = False
+    if(row.get("uid") is not None):
+        text2 = ""
+        route = ""
+        forecast_date = str(row.get('forecast_date'))
+        forecast_time = str(row.get('forecast_time'))
+        diff = diff_date_sting(forecast_date[:10] + forecast_time[10:19])
+
+    if diff == True and row.get('status') == 0:
+        text2 = "Agradecemos su compra. Le informamos que su pedido ha sido entregado satisfactoriamente. Lo invitamos a dejarnos cualquier comentario o sugerencia en el campo inferior."
+        route = "routeended"
+        showmap = 1
+    elif diff == True and row.get('status') == 1:
+        text2 = "Agradecemos su compra.  Le informamos que su pedido esta en camino."
+        if (row.get('unit') == 13077207):
+            route = "716b6eeb1d9319bb1e5d5b4328bd69d3"
+        elif (row.get('unit') == 13077320):
+            route = "1b4c8ebf032028933be85527f32fb2e3"
+        elif (row.get('unit') == 13077364):
+            route = "2666125efca6b5162b2917664bda6d77"
+        else:
+            route = "routeended"
+        showmap = 1
+    elif diff == False and row.get('status') == 1:
+        text2 = "Agradecemos su compra.  Le informamos que nuestro equipo de logística se encuentra en proceso de alistamiento de su pedido."
+        route = "routeended"
+        showmap = 0
+    else:
+        text2 = "Lo sentimos, no hay pedidos con esa información, le solicitamos contactarnos al sitio web https://comercializadoragyl.com/contactenos/."
+        route = "error"
+        showmap = 0
+
+    print("--- default_app firebase checkroute end ---")
+    # ts = int(mktime(datetime.now().timetuple()))
+    link = uuid.uuid4()
+
+    objRoute = {
+        "_request": _request,
+        "raw": {} if route == "error" else row,
+        "status": 404 if route == "error" else 200,
+    	"message": text2,
+    	"route": route,
+        "showmap": showmap,
+        "link": "" if route == "error" else link,
+    }
+
+    if (route != "error"):
+        """
+        with open("static/temporarily/{}.json".format(link), 'w') as outfile:
+            json.dump(objRoute, outfile)
+        print("save file.")
+        objRoute.update({"raw":{}})
+        """
+        file = "static/temporarily/{}.json".format(link)
+        save_to_json_file(objRoute, file)
+        objRoute.update({"raw":{}})
+
+    return objRoute
+
+
+@app.route('/addcomment', methods=['GET', 'POST', 'PUT', 'DELETE'])
+def addcomment():
+    print("--- default_app firebase checkroute ---")
+
+    _request = request.get_json(force=True)
+    register2 = {
+    	"status": 200,
+    	"message": "mensaje en espera..."
+    }
+
+    inforel =  _request.get("inforel")
+    stars =  _request.get("stars")
+    comment =  _request.get("comment")
+
+    if (inforel is not None or stars is not None or comment is not None):
+        register2 = {
+        	"status": 200,
+        	"message": "error, no se pudo procesar el mensaje."
+        }
+
+    today = datetime.now()
+    todayts = int(mktime(today.timetuple()))
+    todaydtiso = datetime.fromtimestamp(todayts)
+
+    messagehtml = "calificación: {}<br>comentario: {}<br><br><hr><br>Información relacionada con este mensaje:<br>cliente: {}<br>email: {}<br>nit: {}<br>factura: {}<br>unidad: {}" \
+    .format(stars,comment,inforel.get("clientname"),inforel.get("email"),inforel.get("nit"),inforel.get("invoiceid"),inforel.get("unit"))
+
+    dataMessageQueue = {
+      "subject":"Nuevo comentario en sistema de seguimiento",
+      "message":messagehtml,
+      "email":"fesusrocuts@gmail.com",
+      "status": 1,
+      "created": todaydtiso,
+      "updated": todaydtiso,
+      "datetimeToSend":todaydtiso
+    }
+    idm = str(uuid.uuid4())
+    db.collection(u'queue').document(idm).set(dataMessageQueue)
+    register2 = {
+        "status": 200,
+        "message": "Se envío el mensaje."
+    }
+    return register2
+
+@app.route('/sendmail', methods=['GET', 'POST', 'PUT', 'DELETE'])
+def sendMailBatch():
+    print("--- sendMailBatch ---")
+
+    today = datetime.now()
+    todayts = int(mktime(today.timetuple()))
+    todaydtiso = datetime.fromtimestamp(todayts)
+
+    docs = db.collection(u'queue') \
+    .where(u'status', u'==', 1).stream()
+
+    for doc in docs:
+        docqueue = doc.to_dict()
+        print("<<<<<<<<<<< docqueue >>>>>>>>>>")
+        print(docqueue)
+        print("<<<<<<<<<<< docqueue end >>>>>>>>>>")
+        try:
+            sendmailhtml("contabilidad@comercializadoragyl.com", docqueue.get("email"), "{}".format(docqueue.get("subject")), 'Hi, The next message you see correctly with html format',docqueue.get("message"))
+            docqueue.update({"status":0})
+        except Exception as e:
+            pass
+        db.collection(u'queue').document(doc.id).set(docqueue)
+
+    register2 = {
+        "status": 200,
+        "message": "Updated all availables mails."
+    }
+    return register2
+
+def load_from_json_file(filename):
+    """
+    creates an Object from a "JSON file"
+    """
+    with open(filename, 'r', encoding='utf-8') as f:
+        return json.load(f)
+
+def save_to_json_file(my_obj, filename):
+    """
+    writes an Object to a text file, using a JSON representation
+    """
+    with open(filename, 'w', encoding='utf-8') as f:
+        json.dump(my_obj, f)

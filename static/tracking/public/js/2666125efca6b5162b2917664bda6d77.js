@@ -560,28 +560,30 @@ $(document).ready(function () {
       msg('Logged successfully');
       initMap();
       init(); // when login suceed then run init() function
-      defaultCheck('13077207', 'FYR67E');
+      //defaultCheck('13077207', 'FYR67E');
       //defaultCheck('13077320', 'TFR862');
-      //defaultCheck('13077364', 'USE051');
+      defaultCheck('13077364', 'USE051');
       $('body').css('width',$(window).width());
       $('body').css('height',$(window).height());
 
       /*machine = [
+      """
         {
-          key: 13077207,
+          key: 13077207,716b6eeb1d9319bb1e5d5b4328bd69d3
           value: 'FYR67E',
           show: 1
         },
         {
-          key: 13077320,
+          key: 13077320,1b4c8ebf032028933be85527f32fb2e3
           value: 'TFR862',
           show: 1
         },
         {
-          key: 13077364,
+          key: 13077364,2666125efca6b5162b2917664bda6d77
           value: 'USE051',
           show: 1
         }
+        """
       ]
       13077207|13077320|13077364
       "[{"key":13077207,"value":"FYR67E","show":1},{"key":13077320,"value":"TFR862","show":0},{"key":13077364,"value":"USE051TFR862","show":0}]"

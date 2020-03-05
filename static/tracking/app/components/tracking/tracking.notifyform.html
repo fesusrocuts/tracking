@@ -1,0 +1,68 @@
+<div class="table-responsive" ng-controller="GridTrackingCtrl">
+  <div class="row">
+    <div class="col-md-12  col-sm-12 justify-content-center p-3">
+      <h4 class="text-center">The message to notify</h4>
+    </div>
+  </div>
+  <div class="row col-md-12">
+    <div class="col-md-12 col-sm-12">
+      <div class="input-group mb-4">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <i class="glyphicon glyphicon-pencil"></i>
+          </span>
+        </div>
+        <input name="url_header" type="text" class="form-control" placeholder="URL image header (Ex. Logo, City, Address, Etc)">
+      </div>
+    </div>
+    <div class="col-md-12 col-sm-12">
+      <div class="input-group mb-4">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <i class="glyphicon glyphicon-pencil"></i>
+          </span>
+        </div>
+        <input name="url_footer" type="text" class="form-control" placeholder="URL image footer (Ex. Sign Digital, Address, Etc)">
+      </div>
+    </div>
+  </div>
+
+  <div class="row col-md-12">
+    <div class="col-md-12 col-sm-12">
+      <div class="input-group mb-12">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <i class="glyphicon glyphicon-pencil"></i>
+          </span>
+        </div>
+        <input name="subject" type="text" class="form-control {{data.cache_id}}" placeholder="Customizable your Subject">
+      </div>
+    </div>
+    <div class="col-md-12 col-sm-12">
+      <div class="input-group mb-12">
+        <label for="">Message</label>
+        <textarea name="body" class="form-control w-100" rows="5">Estimado  {{clientname}}
+
+Agradecemos su compra. Su factura ha sido generado, ahora puede hacer  seguimiento de su envío en el siguiente {{link}}.
+Le solicitamos digitar sur {{nit}} (Sin dígito de verificación) y el número de su factura {{nit}}.
+Si ya recibió su pedido puede dejarnos sus comentarios en el campo servicio.
+
+NOTA: El mapa se muestra únicamente cuando su orden está en ruta. En caso de que la orden se encuentre aún en nuestras bodegas visualizará una imagen estática.
+
+
+Cualquier inquietud con gusto será atentida
+
+Cordialmente,</textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="row col-md-12 p-3">
+    <div class="col-md-6 col-sm-6">
+      <div class="input-group mb-4">
+        <button class="btn btn-primary px-4" type="button">Save and notify</button>
+        <!--<button ng-click="saveOrderForm(TrackingSearch)" class="btn btn-primary px-4" type="button">Save and notify</button>-->
+      </div>
+    </div>
+  </div>
+</div>

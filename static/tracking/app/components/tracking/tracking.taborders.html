@@ -1,19 +1,19 @@
 <div class="row justify-content-center taborders" ng-cloak>
   <md-content>
     <md-tabs class="md-primary" md-center-tabs>
-      <md-tab>
+      <md-tab ng-if="user.rol == 'admin'">
         <md-tab-label>
           <i class="fa fa-thumb-tack" aria-hidden="true"></i>
-          <span>Map</span>
+          <span>Map....</span>
         </md-tab-label>
         <md-tab-body>
           <div ng-include = "'app/components/tracking/tracking.search.html'"></div>
         </md-tab-body>
       </md-tab>
-      <md-tab>
+      <md-tab ng-if="user.rol == 'admin'">
         <md-tab-label>
           <i class="fa fa-forward" aria-hidden="true"></i>
-          <span>New...</span>
+          <span>New....</span>
         </md-tab-label>
         <md-tab-body>
           <md-tab-body>
@@ -39,10 +39,10 @@
           <div ng-include = "'app/components/tracking/tracking.ordersclo.html'"></div>
         </md-tab-body>
       </md-tab>
-      <md-tab>
+      <md-tab ng-if="user.rol == 'admin'">
         <md-tab-label>
           <i class="fa fa-globe" aria-hidden="true"></i>
-          <span>All...</span>
+          <span>All....</span>
         </md-tab-label>
         <md-tab-body>
           <div ng-include = "'app/components/tracking/tracking.ordersall.html'"></div>

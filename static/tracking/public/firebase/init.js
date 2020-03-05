@@ -19,38 +19,129 @@ let setError = function(selectorClassAlert, msgAlert1){
     $(selectorClassAlert).show();
 
 }
+let listOrders = function(fn,_where = []){
+  try{
+    console.log("listOrders...")
+    console.log("listOrders... >> _where >>")
+    console.log(_where)
+    let listOrdersData = []
+    if(_where.length !== 2){
+      throw "failure(3)!";
+    }
 
-let listOrders = function(){
-  firebase.firestore().collection("orders")
-    .where("status", ">", -1)
-    .get().then(function(snapshots) {
-      snapshots.forEach(function(doc) {
-        // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
-      });
-  });
+    firebase.firestore().collection("orders")
+      //.where("status", _where[0][1].toString(), parseInt(_where[0][2]))
+      .where("unit", _where[1][1].toString(), parseInt(_where[1][2]))
+      .get().then(function(snapshots) {
+        snapshots.forEach(function(doc) {
+          // doc.data() is never undefined for query doc snapshots
+          console.log(doc.id, " => ", doc.data());
+          let dataend = doc.data();
+          dataend.id = doc.id;
+          //if(dataend.status == )
+          listOrdersData.push(dataend)
+        });
+        fn(listOrdersData);
+    });
+  }catch(e){
+    console.log("listOrders... >> err >>")
+    console.log(e)
+    fn([]);
+  }
+}
+let updateOrder = function(fn,obj){
+  try{
+    console.log("updateOrder...")
+    console.log("updateOrder... >> obj >>")
+    console.log(obj)
+
+    let listOrdersData = []
+    if(obj === undefined || obj === "" ||
+      obj.id === undefined || obj.id === "" ||
+      obj.nit === undefined || obj.nit === "" ||
+      obj.invoiceid === undefined || obj.invoiceid === ""
+    ){
+      throw "failure(4)!";
+    }
+
+    let tmpid =  obj.id;
+    delete obj.id;
+    obj.status = obj.status === 1 ? 0 : 1;
+    console.log(obj);
+
+    firebase.firestore().collection("orders").doc(tmpid).set(obj)
+    .then(function() {
+        console.log("Document successfully written!");
+        fn(obj)
+    })
+    .catch(function(error) {
+        console.error("Error writing document: ", error);
+    });
+    delete tmpid;
+
+  }catch(e){
+    console.log("listOrders... >> err >>")
+    console.log(e)
+    fn([]);
+  }
 }
 //addOrder({nit:123,invoice:321,units:13077207,location:"bogota",email:"frocuts1982@gmail.com",status:1})
 //addOrder({nit:123,invoice:321,units:13077320,location:"bogota",email:"frocuts1982@gmail.com",status:1})
 //addOrder({nit:123,invoice:321,units:13077364,location:"bogota",email:"frocuts1982@gmail.com",status:1})
-let addOrder = function(newDocument, uid = ""){
+let addOrder = function(newDocument, uid = "", config = ""){
   console.log("addOrder >> ");
   console.log(newDocument);
+  console.log("config")
+  console.log(config)
   console.log("check user ...");
   try{
     if (uid == "") throw "failure!";
+    if (config == "") throw "failure(2)!";
     console.log(uid);
     newDocument.uid = uid;
     newDocument.status = 1;
     newDocument.created = firebase.firestore.FieldValue.serverTimestamp();
     newDocument.updated = newDocument.created;
     firebase.firestore().collection('orders').add(newDocument).catch(function(error) {
-      console.error('Error writing new message to Firebase Database', error);
+      console.error('Error writing new message to Firebase Database 0x00F100', error);
+    });
+
+    //clientname,email,invoiceid,nit,forecast_date,forecast_time,warehouse,unit
+    let header_img ='<img src="'+config.catalog.mail.addorder.header_img+'" height="100" alt="Header">';
+    let footer_img ='<img src="'+config.catalog.mail.addorder.footer_img+'" height="100" alt="Footer">';
+    let subject = config.catalog.mail.addorder.subject;
+    let message = config.catalog.mail.addorder.message;
+    message = Base64.decode(message);
+    message = message.replace('{{header_img}}', header_img);
+    message = message.replace('{{footer_img}}', footer_img);
+    message = message.replace('{{clientname}}', newDocument.clientname);
+    message = message.replace('{{link}}', config.catalog.link.clients);
+    message = message.replace('{{nit}}', newDocument.nit);
+    message = message.replace('{{invoiceid}}', newDocument.invoiceid);
+    let dp1 = newDocument.forecast_date.toISOString().split("T")[0];
+    let dp2 = newDocument.forecast_time.toISOString().split("T")[1];
+    let dp3 = dp2.split(":");
+
+
+    let dataMessageQueue = {
+      "subject":subject,
+      "message":message,
+      "email":newDocument.email,
+      "status": 1,
+      "created": newDocument.created,
+      "updated": newDocument.updated,
+      "datetimeToSend":dp1 + "T" + dp3[0] + ":" + dp3[0] + ":00"
+    }
+    console.log("save Message Queue");
+    console.log(dataMessageQueue);
+    firebase.firestore().collection('queue').add(dataMessageQueue).catch(function(error) {
+      console.error('Error writing new message to Firebase Database 0x00F101', error);
     });
   }catch(e) {
     console.log("failure!");
+    return false;
   }
-
+  return true;
 }
 
 let loadTrackWithEmail2 = function (email, pwd, selectorClassAlert, fn){

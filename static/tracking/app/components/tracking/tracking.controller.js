@@ -3,7 +3,7 @@ angular.module('controller',['angularMoment','ngMaterial', 'ngMessages', 'ngRout
 .run(function(amMoment) {
     amMoment.changeLocale('de');
 })
-.controller('TrackingCtrl',['$scope','$http','$log','$location',function($scope,$http,$log,$location){
+.controller('TrackingCtrl',['$scope','$http','$log','$location','$route',function($scope,$http,$log,$location,$route){
 
   $scope.__trackmsg = ""
   //lista de variable
@@ -12,6 +12,7 @@ angular.module('controller',['angularMoment','ngMaterial', 'ngMessages', 'ngRout
   $scope.goLoginHuman = 0;
   $scope.goSearchHuman = 0;
   $scope.userAuth={}
+
 
   try{
     $scope.user = firebase.auth().currentUser;
@@ -48,6 +49,36 @@ angular.module('controller',['angularMoment','ngMaterial', 'ngMessages', 'ngRout
     $scope.configuration = data.data
   }
 
+  $scope.getSettingMapReload = function($location,$route,$appendscope){
+    console.log("getSettingMapReload")
+    console.log($appendscope.settingmap)
+    let httpOptions = {
+      headers: {
+        'Content-Type':  'application/json',
+        //'Authorization': 'my-auth-token'
+      }
+    };
+    $appendscope.settingmap._request.link=$appendscope.settingmap.link;
+    $appendscope.pushData('POST','/checkroute?t=' + Math.ceil(Math.random()*10000),$appendscope.settingmap._request,httpOptions, "settingmap", $scope.getSettingMap, $appendscope);
+  }
+
+  $scope.getSettingMap = function(data,$location,$route,$appendscope){
+    try{
+      console.log("getSettingMap")
+      console.log(data)
+      $appendscope.settingmap = data.status == 200 ? data.data : {}
+      $appendscope.wait = data.showmap
+
+      setTimeout(function(){
+        console.log("getSettingMap >> launch getSettingMapReload")
+        $scope.getSettingMapReload($location,$route,$appendscope)
+      },60000);
+    }catch(e){
+      console.log("getSettingMap >> err >")
+      console.log(e)
+    }
+  }
+
   $scope.redirectTo = function(url, params){
     console.log("redirectTo >>")
     console.log("url")
@@ -57,12 +88,12 @@ angular.module('controller',['angularMoment','ngMaterial', 'ngMessages', 'ngRout
     $location.path(url).search(params);
   }
 
-  $scope.goHome = function(data,locations){
+  $scope.goHome = function(data,locations,route){
     console.log("goHome")
     $scope.redirectTo("/",{"t":Math.ceil(Math.random()*1000)})
   }
 
-  $scope.pushData = function(method,$url,$params,options,attr,fn) {
+  $scope.pushData = function(method,$url,$params,options,attr,fn,$appendscope = "") {
     try{
       console.log($url);
       console.log("pushData > url > "+$url);
@@ -76,7 +107,11 @@ angular.module('controller',['angularMoment','ngMaterial', 'ngMessages', 'ngRout
       .then(function(response) {
         console.log(response)
         $scope[attr]=response;
-        fn($scope[attr],$location)
+        if($appendscope !== ""){
+          fn($scope[attr],$location,$route,$appendscope)
+        }else{
+          fn($scope[attr],$location,$route)
+        }
       });
       //$post =
       /*$http.post($url,$params,options)
@@ -120,171 +155,227 @@ angular.module('controller',['angularMoment','ngMaterial', 'ngMessages', 'ngRout
   */
 
 }])
-
-.controller('GridTrackingCtrl', function($scope) {
+//$route.current.params
+.controller('GridTrackingCtrl', function($scope,$route) {
 
     console.log("GridTrackingCtrl");
-    $scope.orders = [
-      {
-        id: 1,
-        created: "fechaxxx",
-        email: "alguien@dfa.co",
-        invoice: "2323",
-        location: "bogota",
-        nit: "2322",
-        status: 1,
-        uid: 12122,
-        units: "13077207",
-        updated: "fechaxxx"
-      },
-      {
-        id: 2,
-        created: "fechaxxx2",
-        email: "alguien2@dfa.co",
-        invoice: "2323",
-        location: "bogota",
-        nit: "2323",
-        status: 1,
-        uid: 12122,
-        units: "13077207",
-        updated: "fechaxxx2"
-      },
-      {
-        id: 3,
-        created: "fechaxxx3",
-        email: "alguien2@dfa.co",
-        invoice: "2323",
-        location: "bogota",
-        nit: "2324",
-        status: 1,
-        uid: 12122,
-        units: "13077320",
-        updated: "fechaxxx2"
-      },
-      {
-        id: 4,
-        created: "fechaxxx4",
-        email: "alguien4@dfa.co",
-        invoice: "2325",
-        location: "bogota",
-        nit: "2325",
-        status: 1,
-        uid: 12122,
-        units: "13077364",
-        updated: "fechaxxx4"
-      },
-      {
-        id: 5,
-        created: "fechaxxx",
-        email: "alguien@dfa.co",
-        invoice: "2353",
-        location: "bogota",
-        nit: "2322",
-        status: 1,
-        uid: 12122,
-        units: "13077207",
-        updated: "fechaxxx"
-      },
-      {
-        id: 6,
-        created: "fechaxxx6",
-        email: "alguien6@dfa.co",
-        invoice: "2363",
-        location: "bogota",
-        nit: "2323",
-        status: 1,
-        uid: 12122,
-        units: "13077207",
-        updated: "fechaxxx6"
-      },
-      {
-        id: 7,
-        created: "fechaxxx7",
-        email: "alguien7@dfa.co",
-        invoice: "2323",
-        location: "bogota",
-        nit: "2324",
-        status: 1,
-        uid: 12122,
-        units: "13077320",
-        updated: "fechaxxx7"
-      },
-      {
-        id: 8,
-        created: "fechaxxx8",
-        email: "alguien8@dfa.co",
-        invoice: "2325",
-        location: "bogota",
-        nit: "2325",
-        status: 1,
-        uid: 12122,
-        units: "13077364",
-        updated: "fechaxxx8"
+    console.log("GridTrackingCtrl >> listOrders >>");
+    console.log("$scope.configuration");
+    console.log($scope.configuration);
+    $scope.forecast_date = new Date();
+    $scope.forecast_time = new Date(1970, 0, 1, 9, 0, 0);
+    $scope.orders = [];
+    $scope.setObj = function(obj = ""){
+      updateOrder(function(data){
+        console.log("GridTrackingCtrl >> setObj >> id >>");
+        console.log("you can change before update your page with the button or change the tab");
+        console.log(data);
+      },obj)
+    }
+    $scope.getOrders = function(){
+      return $scope.orders;
+    }
+    $scope.setOrders = function(where = []){
+      listOrders(function(data){
+        console.log("GridTrackingCtrl >> listOrders >> data >>");
+        $scope.orders = data;
+        $scope.getOrders();
+      },where)
+    }
+    $scope.init = function (step = "active") {
+      let unitsarr = $scope.user.units.indexOf("|")>-1 ? $scope.user.units.split("|") : [$scope.user.units]
+      if(step === "active"){
+        if ($scope.user.rol === "auth"){
+          //unitsarr[0] the use has only 1
+          $scope.setOrders([["status", "==", 1],["unit", "==", unitsarr[0].toString()]]);
+          $scope.getOrders();
+        }
+        if ($scope.user.rol === "admin"){
+          $scope.setOrders([["status", "==", 1],["unit", ">", 0]]);
+          $scope.getOrders();
+        }
       }
-    ];
-    console.log("$scope.orders")
-    console.log($scope.orders)
-
+      if(step === "closed"){
+        if ($scope.user.rol === "auth"){
+          //unitsarr[0] the use has only 1
+          $scope.setOrders([["status", "==", 0],["unit", "==", unitsarr[0].toString()]]);
+          $scope.getOrders();
+        }
+        if ($scope.user.rol === "admin"){
+          $scope.setOrders([["status", "==", 0],["unit", ">", 0]]);
+          $scope.getOrders();
+        }
+      }
+      if(step === "all"){
+        if ($scope.user.rol === "auth"){
+          //unitsarr[0] the use has only 1
+          $scope.setOrders([["status", ">", -1],["unit", "==", unitsarr[0].toString()]]);
+          $scope.getOrders();
+        }
+        if ($scope.user.rol === "admin"){
+          $scope.setOrders([["status", ">", -1],["unit", ">", 0]]);
+          $scope.getOrders();
+        }
+      }
+    };
     $scope.units = [
       {
         key: "",
         value: 'Choose Vehicle',
-        show: 1
+        show: 1,
+        isOption: 0
       },
       {
         key: 13077207,
         value: 'FYR67E',
-        show: 1
+        show: 1,
+        isOption: 1
       },
       {
         key: 13077320,
         value: 'TFR862',
-        show: 1
+        show: 1,
+        isOption: 1
       },
       {
         key: 13077364,
         value: 'USE051',
-        show: 1
+        show: 1,
+        isOption: 1
       }
     ];
 
     $scope.fromLoc = [
       {
         key: "",
-        value: 'Choose Location',
-        show: 1
+        value: 'Warehouse',
+        show: 1,
+        isOption: 0
       },
       {
         key: "bogota",
         value: "bogota",
-        show: 1
+        show: 1,
+        isOption: 1
       },
       {
         key: "medellin",
         value: "medellín",
-        show: 1
+        show: 1,
+        isOption: 1
       }
     ];
 
-    $scope.selectunit = $scope.units[0];
-    $scope.selectFromLoc = $scope.fromLoc[0];
+    $scope.unit = $scope.units[0];
+    $scope.warehouse = $scope.fromLoc[0];
 
-    $scope.changestatus = function(id){
-      console.log("changestatus >> id >>")
-      console.log(id)
+    $scope.changestatus = function(obj){
+      console.log("changestatus >> obj >>")
+      console.log(obj);
+      $scope.setObj(obj);
+    }
+
+    $scope.restartTrackForm = function(){
+      console.log("restartTrackForm >>")
+      $scope.clientname = "";
+      $scope.email = "";
+      $scope.invoiceid = "";
+      $scope.nit = "";
+      //it is left the values received for optimization
+      //$scope.forecast_date = "";
+      //it is left the values received for optimization
+      //$scope.forecast_time = "";
+      $scope.warehouse = $scope.fromLoc[0];
+      $scope.unit = $scope.units[0];
+    }
+
+    $scope.saveTrackForm = function(form){
+      console.log("GridTrackingCtrl >> saveTrackForm >>")
+      try{
+        console.log(form);
+
+        $scope.__trackmsg4 = ""
+        let fields = [
+          "clientname","email","forecast_date","forecast_time","invoiceid","nit","warehouse","unit"
+        ];
+
+        let errField = 0;
+        let formValue = {}
+        for (let i = 0;i < fields.length; i++) {
+          console.log("form[fields[i]].$modelValue")
+          console.log(fields[i])
+          console.log(form[fields[i]].$modelValue)
+          if (form[fields[i]].$modelValue == undefined){
+            errField++;
+          }else{
+            if (fields[i] === "warehouse" || fields[i] === "unit"){
+              if (form[fields[i]].$modelValue.isOption === 0){
+                errField++;
+              }else{
+                formValue[fields[i]] = form[fields[i]].$modelValue.key
+              }
+            }else{
+              formValue[fields[i]] = form[fields[i]].$modelValue
+            }
+          }
+        }
+        console.log("validation...")
+        console.log(formValue)
+        console.log("errField")
+        console.log(errField)
+
+
+        if (errField > 0)
+        {
+          $scope.__trackmsg4 += "you need fill all fields";
+        }
+        //diferencia en dias
+        //var df=getSubtractDays(form.L005.$modelValue,form.L004.$modelValue);
+        //var df=form.L005.$modelValue,form.L004.$modelValue);
+
+        //si es mayor a un año
+        if($scope.__trackmsg4.length == 0){
+          console.log("saveTrackForm >> $scope.user")
+          console.log($scope.user)
+          if (addOrder(formValue,$scope.user.uid, $scope.configuration)) {
+            $scope.__trackmsg4 = "Was saved successfully";
+            $scope.restartTrackForm();
+          }else{
+            $scope.__trackmsg4 = "Could not save (0x0F12)";
+          }
+        }
+      }catch(e){
+        $scope.__trackmsg4 = "an error has occurred (0x0F11)";
+        console.log(e);
+      }
+    }
+
+    $scope.goTracking = function(data,locations,route){
+      console.log("goTracking");
+      console.log("goTracking >> data >>");
+      console.log(data);
+      if (data.data.status === 200){
+        $scope.__trackmsg4 = "The notify was created";
+        console.log("200, $scope.__trackmsg4");
+        console.log($scope.__trackmsg4);
+        //loadTrackWithEmail($scope.goLoginEmail,data.data, ".msgAlert1", $scope.goLoginOk);
+      }else{
+        $scope.__trackmsg4 = "an error has occurred (0x0F10)";
+        console.log("200, $scope.__trackmsg4");
+        //$scope.__trackmsg4 = data.data.message;
+      }
     }
 })
 
-.controller('MyControllerCtrl', function($scope, $mdSidenav) {
+.controller('MyControllerCtrl', function($scope, $route, $mdSidenav) {
 
     console.log("MyControllerCtrl");
     $scope.openLeftMenu = function() {
       $mdSidenav('left').toggle();
     };
-
 })
 
-.controller('CheckLoginCtrl', function($scope, $location) {
+.controller('CheckLoginCtrl', function($scope, $route, $location) {
 
     console.log("CheckLoginCtrl");
 
@@ -295,6 +386,7 @@ angular.module('controller',['angularMoment','ngMaterial', 'ngMessages', 'ngRout
         throw new ExcepcionGeneric(1001,"user not found")
 
       $scope.user.rol = firebase.$$t._request.rol
+      $scope.user.units = firebase.$$t._request.units
       $scope.user.username = firebase.$$t._request.user
 
     }catch(e){
@@ -307,7 +399,7 @@ angular.module('controller',['angularMoment','ngMaterial', 'ngMessages', 'ngRout
     }
 })
 
-.controller('AdminTrackingCtrl', function($scope, $location) {
+.controller('AdminTrackingCtrl', function($scope, $route, $location) {
 
     console.log("AdminTrackingCtrl");
     console.log("firebase.$$t >>")
@@ -328,7 +420,7 @@ angular.module('controller',['angularMoment','ngMaterial', 'ngMessages', 'ngRout
 })
 
 
-.controller('LoginTrackingCtrl', function($scope, $location) {
+.controller('LoginTrackingCtrl', function($scope, $route, $location) {
 
     console.log("LoginTrackingCtrl");
     console.log("$scope.goLoginHuman");
@@ -423,7 +515,7 @@ angular.module('controller',['angularMoment','ngMaterial', 'ngMessages', 'ngRout
       location.href = location.protocol + "//" + location.host  + location.pathname + "#!/tracking/admin"
     }
 
-    $scope.goLogin = function(data,locations){
+    $scope.goLogin = function(data,locations,route){
       console.log("goLogin");
       console.log("goLogin >> data >>");
       console.log(data);
@@ -439,7 +531,7 @@ angular.module('controller',['angularMoment','ngMaterial', 'ngMessages', 'ngRout
 
 })
 
-.controller('DrawStarsCtrl', function($scope) {
+.controller('DrawStarsCtrl', function($scope, $route) {
 
     console.log("DrawStarsCtrl");
     $scope.stars = 0;
@@ -470,23 +562,32 @@ angular.module('controller',['angularMoment','ngMaterial', 'ngMessages', 'ngRout
 })
 
 
-.controller('DrawTrackingCtrl', function($scope, $sce, $location) {
-
+.controller('DrawTrackingCtrl', function($scope, $route, $sce, $location) {
     console.log("DrawTrackingCtrl");
     console.log("$location >> ");
     console.log($location);
     console.log($location.$$search);
-
+    console.log("$scope.user")
+    console.log($scope.user)
+    $scope.wait = 1;
+    $scope.settingmap = {
+      "message":"Validando su token, espere por favor......"
+    }
     $scope.trustSrc = function(src) {
         return $sce.trustAsResourceUrl(src);
     }
-    $scope.order = $location.$$search.order;
+    let httpOptions = {
+      headers: {
+        'Content-Type':  'application/json',
+        //'Authorization': 'my-auth-token'
+      }
+    };
+    $scope.pushData('GET','/static/temporarily/'+$location.$$search.link+'.json',{},httpOptions, "settingmap", $scope.getSettingMap, $scope);
+    //$scope.order = $location.$$search.link;
     //$scope.order = "http://plataforma.gps7000.com/?sid=026514bc837bcf18473765b9958fb7fd"
-
-
 })
 
-.controller('SearchDateTrackingCtrl', function($scope, $location) {
+.controller('SearchDateTrackingCtrl', function($scope, $route, $location) {
 
     console.log("SearchDateTrackingCtrl");
 
@@ -511,9 +612,10 @@ angular.module('controller',['angularMoment','ngMaterial', 'ngMessages', 'ngRout
     $scope.getRandomUuid = function (){
       return Math.floor((Math.random()*6)+1);
     };
-    $scope.getTracking = function(data,locations){
+    $scope.getTracking = function(data,locations,route){
       console.log("getTracking")
       console.log(data)
+
       if (data.data.status==200){
         $scope.redirectTo("tracking/map",{"order":data.data.route})
       }else{
@@ -521,11 +623,22 @@ angular.module('controller',['angularMoment','ngMaterial', 'ngMessages', 'ngRout
       }
     }
 
+    $scope.getRatingToNotify = function(data,locations,route,$appendscope){
+      console.log("getRatingToNotify")
+      console.log(data)
+      $appendscope.comment = ""
+      $appendscope.__trackmsg5 = data.data.message
+    }
+
     $scope.showRate = function(form){
       console.log("active comment");
       $('.margtop100').remove();
       $('.rate').removeClass('d-none');
       $('.rate').show();
+    }
+    $scope.hiddenintro = function(form){
+      console.log("hiddenintro");
+      $('.messagetoclient').hide();
     }
 
     //procesa la peticion de envio de datos del formulario
@@ -552,20 +665,44 @@ angular.module('controller',['angularMoment','ngMaterial', 'ngMessages', 'ngRout
               //'Authorization': 'my-auth-token'
             }
           };
+
           //guardar en el servidor
-          $scope.pushData('GET','/static/tracking/public/json/tracking.json?t=' + Math.ceil(Math.random()*10000),{},httpOptions, "tracking", $scope.getTracking);
+          $scope.pushData('POST','/checkroute?t=' + Math.ceil(Math.random()*10000),{"nit":form.nit.$modelValue,"invoiceid":form.invoiceid.$modelValue},httpOptions, "trackingIframe", $scope.goIframe);
+          //$scope.pushData('GET','/static/tracking/public/json/tracking.json?t=' + Math.ceil(Math.random()*10000),{},httpOptions, "tracking", $scope.getTracking);
         }
       }catch(e){
         console.log(e);
       }
     }
 
-    $scope.saveSearchForm2 = function(form){
+    $scope.goIframe = function(data,locations,route){
+      console.log("goIframe");
+      console.log("goIframe >> data >>");
+      console.log(data);
+      console.log("goIframe >> locations >>");
+      console.log(locations);
+      console.log("goIframe >> route >>");
+      console.log(route);
+      //route.reload()
+      //route.updateParams({child: 'all'});
+      //route.current.params
+      if (data.data.status === 200){
+        $scope.__trackmsg = "Loading map, wait please...";
+        $scope.redirectTo("/tracking/map",{"link":data.data.link,"t":Math.ceil(Math.random()*1000)})
+        //loadTrackWithEmail($scope.goLoginEmail,data.data, ".msgAlert1", $scope.goLoginOk);
+      }else{
+        $scope.__trackmsg = data.data.message;
+      }
+    }
+
+    $scope.saveSearchForm2 = function(form, inforel){
       console.log("saveSearchForm2 >>>>> ");
       try{
         //$scope.stars = $(".stars .checked").length;
         console.log(form.stars.$modelValue);
         console.log(form);
+        console.log(inforel);
+
 
         $scope.__trackmsg2 = ""
         if ((form.stars.$modelValue.length == 0 || form.stars.$modelValue == 0) || form.comment.$modelValue.length == 0)
@@ -585,8 +722,13 @@ angular.module('controller',['angularMoment','ngMaterial', 'ngMessages', 'ngRout
               //'Authorization': 'my-auth-token'
             }
           };
-          //guardar en el servidor
-          $scope.pushData('GET','/static/tracking/public/json/tracking.json?t=' + Math.ceil(Math.random()*10000),{},httpOptions, "trackingComment", $scope.goHome);
+
+          let dataToSend = {
+            "inforel":inforel,
+            "stars":form.stars.$modelValue,
+            "comment":form.comment.$modelValue
+          }
+          $scope.pushData('POST','/addcomment?t=' + Math.ceil(Math.random()*10000),dataToSend,httpOptions, "ratingtonotify", $scope.getRatingToNotify, $scope);
           //$scope.__trackmsg2 = "";
         }
       }catch(e){

@@ -41,6 +41,14 @@
 .border-1 {
     border-width:1px !important;
 }
+.messagetoclient {
+  top: 8%;
+  left: 5%;
+  border: none;
+  padding: 10px;
+  max-width: calc(100% - 100);
+  position: fixed;
+}
 </style>
 <div class="tracking-ctr-qualify-top  justify-content-center">
   <form name="{{configuration.catalog.form.trackingsearch.name}}" class="form-vertical center-block text-center" ng-controller="SearchDateTrackingCtrl" novalidate>
@@ -71,7 +79,8 @@
                   <div class="p-1 mb-1 row"></div>
                   <div class="p-1 mb-1 row">
                     <div class="col-12">
-                      <button ng-click="saveSearchForm2(TrackingSearch)" class="btn btn-primary px-4" type="button">Send</button>
+                      <button ng-click="saveSearchForm2(TrackingSearch,settingmap.raw)" class="btn btn-primary px-4" type="button">Send</button>
+                      <p>{{__trackmsg5}}</p>
                     </div>
                   </div>
                 </div>
@@ -88,7 +97,7 @@
           </div>
         </div>
 
-        <div class="row justify-content-center margtop100">
+        <div ng-if="settingmap.showmap == 1" class="row justify-content-center margtop100">
           <div class="p-1 mb-1 row">
             <div class="col-12">
               <button ng-click="showRate(TrackingSearch)" class="btn btn-primary px-4" type="button">Rate the service</button>
@@ -96,6 +105,23 @@
           </div>
         </div>
 
+      </div>
+
+      <div class="container">
+        <div class="row justify-content-center messagetoclient">
+          <div class="col-md-12">
+            <div class="card-group">
+              <div class="card">
+                <div class="card-body">
+                  {{settingmap.message}}
+                  <div class="text-right">
+                    <i ng-click="hiddenintro()" class="fa fa-times" style="font-size:48px;color:{{order.status === 1 ? 'blue' : 'gray'}}"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </fieldset>
   </form>

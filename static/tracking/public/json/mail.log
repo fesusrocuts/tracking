@@ -1,0 +1,20 @@
+{{header_img}}
+<br>
+<br>
+Estimado  {{clientname}}
+<br>
+<br>
+Agradecemos su compra. Su factura ha sido generado, ahora puede hacer  seguimiento de su envío en el siguiente {{link}}.
+Le solicitamos digitar sur {{nit}} (Sin dígito de verificación) y el número de su factura {{invoiceid}}.
+Si ya recibió su pedido puede dejarnos sus comentarios en el campo servicio.
+<br>
+NOTA: El mapa se muestra únicamente cuando su orden está en ruta. En caso de que la orden se encuentre aún en nuestras bodegas visualizará una imagen estática.
+<br>
+<br>
+Cualquier inquietud con gusto será atentida
+<br>
+<br>
+<br>
+Cordialmente,
+<br>
+{{footer_img}}

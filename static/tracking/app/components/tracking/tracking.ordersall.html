@@ -1,32 +1,34 @@
-<div class="table-responsive" ng-controller="GridTrackingCtrl">
+<div class="table-responsive" ng-controller="GridTrackingCtrl" data-ng-init="init('all')">
   <table class="table table-striped">
     <thead>
       <tr>
         <td class="d-none" scope="row">Id</td>
+        <td>Status</td>
         <td>Invoice</td>
         <td>Nit</td>
         <td>Units</td>
         <td>Email</td>
-        <td>Created</td>
-        <td>Updated</td>
-        <td>Location</td>
-        <td class="d-none">Status</td>
+        <td class="d-none">Created</td>
+        <td class="d-none">Updated</td>
+        <td>Warehouse</td>
         <td class="d-none">Uid</td>
       </tr>
     </thead>
     <tbody>
       <tr ng-repeat="order in orders">
         <td class="d-none" scope="row">{{order.id}}</td>
-        <td>{{order.invoice}}</td>
+        <td><i class="fa fa-toggle-{{order.status === 1 ? 'on' : 'off'}}" style="font-size:48px;color:{{order.status === 1 ? 'blue' : 'gray'}}"></i></td>
+        <td>{{order.invoiceid}}</td>
         <td>{{order.nit}}</td>
-        <td>{{order.units}}</td>
+        <td>{{order.unit}}</td>
         <td>{{order.email}}</td>
-        <td>{{order.created}}</td>
-        <td>{{order.updated}}</td>
-        <td>{{order.location}}</td>
-        <td class="d-none">{{order.status}}</td>
+        <td class="d-none">{{order.created}}</td>
+        <td class="d-none">{{order.updated}}</td>
+        <td>{{order.warehouse}}</td>
         <td class="d-none">{{order.uid}}</td>
       </tr>
     </tbody>
   </table>
+  <button class="btn btn-primary px-4" ng-click="init('all')" type="button">Refresh</button>
+  <button class="btn btn-primary px-4" ng-click="getOrders()" type="button">Review Data into console</button>
 </div>

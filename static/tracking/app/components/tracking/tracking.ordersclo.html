@@ -1,4 +1,4 @@
-<div class="table-responsive" ng-controller="GridTrackingCtrl">
+<div class="table-responsive" ng-controller="GridTrackingCtrl" data-ng-init="init('closed')">
   <table class="table table-striped">
     <thead>
       <tr>
@@ -7,26 +7,28 @@
         <td>Nit</td>
         <td>Units</td>
         <td>Email</td>
-        <td>Created</td>
-        <td>Updated</td>
-        <td>Location</td>
+        <td class="d-none">Created</td>
+        <td class="d-none">Updated</td>
+        <td>Warehouse</td>
         <td class="d-none">Status</td>
         <td class="d-none">Uid</td>
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="order in orders">
+      <tr ng-if="order.status == 0" ng-repeat="order in orders">
         <td class="d-none" scope="row">{{order.id}}</td>
-        <td>{{order.invoice}}</td>
+        <td>{{order.invoiceid}}</td>
         <td>{{order.nit}}</td>
-        <td>{{order.units}}</td>
+        <td>{{order.unit}}</td>
         <td>{{order.email}}</td>
-        <td>{{order.created}}</td>
-        <td>{{order.updated}}</td>
-        <td>{{order.location}}</td>
+        <td class="d-none">{{order.created}}</td>
+        <td class="d-none">{{order.updated}}</td>
+        <td>{{order.warehouse}}</td>
         <td class="d-none">{{order.status}}</td>
         <td class="d-none">{{order.uid}}</td>
       </tr>
     </tbody>
   </table>
+  <button class="btn btn-primary px-4" ng-click="init('closed')" type="button">Refresh</button>
+  <button class="btn btn-primary px-4" ng-click="getOrders()" type="button">Review Data into console</button>
 </div>
