@@ -49,6 +49,9 @@
   max-width: calc(100% - 100);
   position: fixed;
 }
+.closedrate{
+  position: fixed;margin: -35px 0px 0px 185px;
+}
 </style>
 <div class="tracking-ctr-qualify-top  justify-content-center">
   <form name="{{configuration.catalog.form.trackingsearch.name}}" class="form-vertical center-block text-center" ng-controller="SearchDateTrackingCtrl" novalidate>
@@ -82,6 +85,9 @@
                       <button ng-click="saveSearchForm2(TrackingSearch,settingmap.raw)" class="btn btn-primary px-4" type="button">Send</button>
                       <p>{{__trackmsg5}}</p>
                     </div>
+                  </div>
+                  <div class="closedrate">
+                    <i ng-click="hiddenqualify()" class="fa fa-times" style="font-size:48px;color:gray" role="button" tabindex="0"></i>
                   </div>
                 </div>
               </div>

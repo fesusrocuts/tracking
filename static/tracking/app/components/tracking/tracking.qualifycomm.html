@@ -7,6 +7,9 @@
   height:216px;
   overflow:hidden;
 }
+.closedrate{
+  position: fixed;margin: -35px 0px 0px 185px;
+}
 </style>
 <div class="tracking-ctr-qualify-top  col-md-12">
   <form name="{{configuration.catalog.form.trackingsearch.name}}" class="form-vertical center-block text-center" ng-controller="SearchDateTrackingCtrl" novalidate>
@@ -17,13 +20,16 @@
             <div class="card-group">
               <div class="card p-1">
                 <div class="card-body">
-                  <h4>Rate the service</h4>
+                  <h4>Califica el servicio</h4>
                   <div class="form-group">
                     <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3" placeholder="Comment"></textarea>
                   </div>
                   <div class="p-1 mb-1 row">
                     <div class="col-12">
                       <button ng-click="saveSearchForm(TrackingSearch)" class="btn btn-primary px-4" type="button">Send</button>
+                    </div>
+                    <div class="closedrate">
+                      <i ng-click="hiddenqualify()" class="fa fa-times" style="font-size:48px;color:gray" role="button" tabindex="0"></i>
                     </div>
                   </div>
                 </div>

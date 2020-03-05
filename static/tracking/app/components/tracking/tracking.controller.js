@@ -436,6 +436,11 @@ angular.module('controller',['angularMoment','ngMaterial', 'ngMessages', 'ngRout
     $scope.question = "write today in roman numeral X";
     $scope.goLoginEmail = "";
 
+    $scope.hiddenfooter = function(){
+      console.log("hiddenfooter");
+      $('.contactfooter').hide();
+    }
+
     $scope.saveSearchForm3 = function(form){
       console.log("saveSearchForm3 >>>>> ");
       try{
@@ -593,6 +598,13 @@ angular.module('controller',['angularMoment','ngMaterial', 'ngMessages', 'ngRout
 
     $scope.question = "write today in roman numeral";
 
+
+    $scope.hiddenqualify = function(){
+      console.log("hiddenqualify");
+      $('.margtop100').show();
+      $('.rate').hide();
+    }
+
     $scope.selectedDispatch = '';
     $scope.selectDispatch = [
       {value: 'Bogota', viewValue: 'Bogota'},
@@ -632,7 +644,7 @@ angular.module('controller',['angularMoment','ngMaterial', 'ngMessages', 'ngRout
 
     $scope.showRate = function(form){
       console.log("active comment");
-      $('.margtop100').remove();
+      $('.margtop100').hide();
       $('.rate').removeClass('d-none');
       $('.rate').show();
     }
